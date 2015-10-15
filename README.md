@@ -12,9 +12,9 @@ Explora is an app that allows you to instantly see what events are going on arou
 
 ### Wireframes
 
-[Discovery and Account flow](https://drive.google.com/file/d/0B1XXDVXInd7kaWlYRUlFTllOdlk/view?usp=sharing)
-[Create an event flow](https://drive.google.com/file/d/0B9P1TmAEy44_cE5KNDR1WXRRdzQ/view?usp=sharing)
-[Further thoughts](https://drive.google.com/open?id=162IxgjdJnKPv_NFpxXUB_cviNCQhIWY9JGQ-sI1zvXY)
+* [Discovery and Account flow](https://drive.google.com/file/d/0B1XXDVXInd7kaWlYRUlFTllOdlk/view?usp=sharing)
+* [Create an event flow](https://drive.google.com/file/d/0B9P1TmAEy44_cE5KNDR1WXRRdzQ/view?usp=sharing)
+* [Further thoughts](https://drive.google.com/open?id=162IxgjdJnKPv_NFpxXUB_cviNCQhIWY9JGQ-sI1zvXY)
 
 ### Features
 
