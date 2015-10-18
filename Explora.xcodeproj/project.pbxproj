@@ -16,6 +16,11 @@
 		840481401BD3967A007A693E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404813F1BD3967A007A693E /* MapKit.framework */; };
 		840481451BD3982F007A693E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 840481441BD3982F007A693E /* Credentials.plist */; settings = {ASSET_TAGS = (); }; };
 		840481481BD398A7007A693E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840481471BD398A7007A693E /* Credentials.swift */; settings = {ASSET_TAGS = (); }; };
+		8404814A1BD3A1BB007A693E /* ExploraUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840481491BD3A1BB007A693E /* ExploraUser.swift */; settings = {ASSET_TAGS = (); }; };
+		8404814C1BD3A327007A693E /* ExploraEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404814B1BD3A327007A693E /* ExploraEvent.swift */; settings = {ASSET_TAGS = (); }; };
+		8404814E1BD3B22D007A693E /* ExploraClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404814D1BD3B22D007A693E /* ExploraClient.swift */; settings = {ASSET_TAGS = (); }; };
+		840481501BD3B38E007A693E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404814F1BD3B38E007A693E /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		840481521BD3B3EB007A693E /* LoginFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840481511BD3B3EB007A693E /* LoginFlow.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,11 @@
 		8404813F1BD3967A007A693E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		840481441BD3982F007A693E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		840481471BD398A7007A693E /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		840481491BD3A1BB007A693E /* ExploraUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraUser.swift; sourceTree = "<group>"; };
+		8404814B1BD3A327007A693E /* ExploraEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraEvent.swift; sourceTree = "<group>"; };
+		8404814D1BD3B22D007A693E /* ExploraClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraClient.swift; sourceTree = "<group>"; };
+		8404814F1BD3B38E007A693E /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		840481511BD3B3EB007A693E /* LoginFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginFlow.storyboard; sourceTree = "<group>"; };
 		A72B4C40C9A988AC31761544 /* Pods_Explora.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Explora.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +91,8 @@
 				840481461BD39898007A693E /* API */,
 				8404812C1BCF55A8007A693E /* AppDelegate.swift */,
 				8404812E1BCF55A8007A693E /* ViewController.swift */,
+				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
+				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
 				840481301BCF55A8007A693E /* Main.storyboard */,
 				840481331BCF55A9007A693E /* Assets.xcassets */,
 				840481351BCF55A9007A693E /* LaunchScreen.storyboard */,
@@ -93,6 +105,8 @@
 		840481411BD39704007A693E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				840481491BD3A1BB007A693E /* ExploraUser.swift */,
+				8404814B1BD3A327007A693E /* ExploraEvent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -101,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				840481471BD398A7007A693E /* Credentials.swift */,
+				8404814D1BD3B22D007A693E /* ExploraClient.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -183,6 +198,7 @@
 				840481451BD3982F007A693E /* Credentials.plist in Resources */,
 				840481341BCF55A9007A693E /* Assets.xcassets in Resources */,
 				840481321BCF55A9007A693E /* Main.storyboard in Resources */,
+				840481521BD3B3EB007A693E /* LoginFlow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,8 +257,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8404814C1BD3A327007A693E /* ExploraEvent.swift in Sources */,
+				840481501BD3B38E007A693E /* SignUpViewController.swift in Sources */,
 				8404812F1BCF55A8007A693E /* ViewController.swift in Sources */,
 				8404812D1BCF55A8007A693E /* AppDelegate.swift in Sources */,
+				8404814A1BD3A1BB007A693E /* ExploraUser.swift in Sources */,
+				8404814E1BD3B22D007A693E /* ExploraClient.swift in Sources */,
 				840481481BD398A7007A693E /* Credentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
