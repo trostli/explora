@@ -14,6 +14,8 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +23,13 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func testExploraEvent() {
+        let testObject = ExploraEvent()
+        testObject.eventTitle = "testing event"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            print("Object has been saved.")
+        }
+    }
     /*
     // MARK: - Navigation
 
