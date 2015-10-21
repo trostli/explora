@@ -11,6 +11,7 @@
 		65A854131BD74675003090FD /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A854121BD74675003090FD /* Credentials.plist */; settings = {ASSET_TAGS = (); }; };
 		65A854171BD74B54003090FD /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A854161BD74B54003090FD /* DiscoveryViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		65A8541B1BD74ED1003090FD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65A8541A1BD74ED1003090FD /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		65A8541D1BD85713003090FD /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A8541C1BD85713003090FD /* EventDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8404812D1BCF55A8007A693E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404812C1BCF55A8007A693E /* AppDelegate.swift */; };
 		8404812F1BCF55A8007A693E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404812E1BCF55A8007A693E /* ViewController.swift */; };
 		840481321BCF55A9007A693E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840481301BCF55A8007A693E /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		65A854121BD74675003090FD /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		65A854161BD74B54003090FD /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		65A8541A1BD74ED1003090FD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		65A8541C1BD85713003090FD /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		840481291BCF55A8007A693E /* Explora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Explora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8404812C1BCF55A8007A693E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8404812E1BCF55A8007A693E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
 				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
 				840481301BCF55A8007A693E /* Main.storyboard */,
+				65A8541C1BD85713003090FD /* EventDetailViewController.swift */,
 				840481331BCF55A9007A693E /* Assets.xcassets */,
 				840481351BCF55A9007A693E /* LaunchScreen.storyboard */,
 				840481381BCF55A9007A693E /* Info.plist */,
@@ -270,6 +273,7 @@
 				8404814C1BD3A327007A693E /* ExploraEvent.swift in Sources */,
 				840481501BD3B38E007A693E /* SignUpViewController.swift in Sources */,
 				8404812F1BCF55A8007A693E /* ViewController.swift in Sources */,
+				65A8541D1BD85713003090FD /* EventDetailViewController.swift in Sources */,
 				8404812D1BCF55A8007A693E /* AppDelegate.swift in Sources */,
 				8404814A1BD3A1BB007A693E /* ExploraUser.swift in Sources */,
 				8404814E1BD3B22D007A693E /* ExploraClient.swift in Sources */,
