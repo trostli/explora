@@ -81,19 +81,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func testGetUser() {
-        PFUser.logInWithUsernameInBackground("blahblah@blah.com", password:"testing") {
-            (user: PFUser?, error: NSError?) -> Void in
-            if user != nil {
-                // Do stuff after successful login.
-                print(user)
-            } else {
-                // The login failed. Check error to see why.
-                print(error)
-            }
-        }
-    }
-    
     func testExploraEvent() {
         let testObject = ExploraEvent()
         testObject.eventTitle = "testing event"

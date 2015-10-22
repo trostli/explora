@@ -64,14 +64,24 @@
                                     <segue destination="TnQ-ru-sDe" kind="show" id="eXE-9s-KhP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qob-XY-zzs" userLabel="Signin Button">
+                                <rect key="frame" x="277" y="322" width="47" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Sign In"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="zDw-8S-bcn" eventType="touchUpInside" id="L0m-1s-MG5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WWK-AX-81h" firstAttribute="top" secondItem="RqT-w0-Qwh" secondAttribute="bottom" constant="8" id="2lg-1j-MGU"/>
                             <constraint firstItem="a3Y-xE-TV2" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="7jO-ml-Xpd"/>
+                            <constraint firstItem="qob-XY-zzs" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="En6-DH-7uH"/>
                             <constraint firstItem="7zc-aH-2GO" firstAttribute="top" secondItem="Gv9-D1-gN9" secondAttribute="bottom" constant="8" id="Grq-8k-P7g"/>
                             <constraint firstItem="RqT-w0-Qwh" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="a1P-x1-gko"/>
+                            <constraint firstItem="qob-XY-zzs" firstAttribute="top" secondItem="7zc-aH-2GO" secondAttribute="bottom" constant="20" id="b6f-4h-pjE"/>
                             <constraint firstItem="NiZ-97-KZF" firstAttribute="top" secondItem="a3Y-xE-TV2" secondAttribute="bottom" constant="34" id="c9J-dz-9u5"/>
                             <constraint firstItem="7zc-aH-2GO" firstAttribute="centerX" secondItem="Gv9-D1-gN9" secondAttribute="centerX" id="h8v-Z2-n4R"/>
                             <constraint firstItem="RqT-w0-Qwh" firstAttribute="top" secondItem="Nsj-Cy-YRI" secondAttribute="bottom" constant="104" id="jtO-Bo-9SU"/>
@@ -83,6 +93,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LJl-kz-ERt"/>
+                    <connections>
+                        <outlet property="passwordField" destination="7zc-aH-2GO" id="IXA-Ag-mMe"/>
+                        <outlet property="usernameField" destination="WWK-AX-81h" id="sFs-j4-VWQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LXh-67-xdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,7 +10,10 @@ import UIKit
 import ParseFacebookUtilsV4
 
 class LoginViewController: UIViewController {
-
+    
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +51,22 @@ class LoginViewController: UIViewController {
                 let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
                 alertController.addAction(button)
                 self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func loginButtonPressed(sender: AnyObject) {
+        let username = usernameField.text!;
+        let password = passwordField.text!;
+        
+        PFUser.logInWithUsernameInBackground(username, password: password) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                // Do stuff after successful login.
+                print(user)
+            } else {
+                // The login failed. Check error to see why.
+                print(error)
             }
         }
     }
