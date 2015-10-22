@@ -55,7 +55,8 @@ Explora is an app that allows you to instantly see what events are going on arou
 
 #### Optional
 - [ ] Discovery screen
- -  [ ] There is a search bar that will filter the markers displayed
+ - [ ] There is a search bar that will filter the markers displayed
+ - [ ] There is a line connecting the event location with the optional meeting location
 
 - [ ] Event Detail Page
  - [ ] There should be a comments section
@@ -74,6 +75,9 @@ Explora is an app that allows you to instantly see what events are going on arou
 
 #### Bonus
 - [ ] Event ownership can be transferred
+
+### Discovery Walkthrough
+![Video Walkthrough](https://i.imgur.com/wFTWEjP.gif)
 
 
 
