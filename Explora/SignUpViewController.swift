@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseFacebookUtilsV4
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
@@ -19,7 +20,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        testGetUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,6 +47,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             } else {
                 // Hooray! Let them use the app now.
                 print ("success signing up")
+            }
+        }
+    }
+    
+    @IBAction func signUpWithFacebookButtonPressed(sender: AnyObject) {
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(nil) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let user = user {
+                if user.isNew {
+                    print("User signed up and logged in through Facebook!")
+                } else {
+                    print("User logged in through Facebook!")
+                }
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
             }
         }
     }
