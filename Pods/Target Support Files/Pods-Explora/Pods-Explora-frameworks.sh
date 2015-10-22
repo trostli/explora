@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Explora/FBSDKCoreKit.framework"
   install_framework "Pods-Explora/FBSDKLoginKit.framework"
   install_framework "Pods-Explora/MBProgressHUD.framework"
+  install_framework "Pods-Explora/Mapbox.framework"
   install_framework "Pods-Explora/Parse.framework"
   install_framework "Pods-Explora/ParseFacebookUtilsV4.framework"
 fi
@@ -98,6 +99,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Explora/FBSDKCoreKit.framework"
   install_framework "Pods-Explora/FBSDKLoginKit.framework"
   install_framework "Pods-Explora/MBProgressHUD.framework"
+  install_framework "Pods-Explora/Mapbox.framework"
   install_framework "Pods-Explora/Parse.framework"
   install_framework "Pods-Explora/ParseFacebookUtilsV4.framework"
 fi

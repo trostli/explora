@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
+import Mapbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         ExploraEvent.registerSubclass()
-        Parse.setApplicationId(ParseCredentials.defaultCredentials.parseID, clientKey: ParseCredentials.defaultCredentials.parseKey)
+        Parse.setApplicationId(Credentials.defaultCredentials.parseID, clientKey: Credentials.defaultCredentials.parseKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        MGLAccountManager.setAccessToken(Credentials.defaultCredentials.mapboxKey)
         
         return true
     }
