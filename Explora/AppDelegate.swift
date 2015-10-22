@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(Credentials.defaultCredentials.parseID, clientKey: Credentials.defaultCredentials.parseKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         MGLAccountManager.setAccessToken(Credentials.defaultCredentials.mapboxKey)
+
+        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("CreateEventVC")
+        window?.rootViewController = vc
         
         return true
     }
