@@ -56,12 +56,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
                 if user.isNew {
-                    print("User signed up and logged in through Facebook!")
+                    let message = "User signed up and logged in through Facebook!"
+                    print(message)
+                    let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                    alertController.addAction(button)
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 } else {
-                    print("User logged in through Facebook!")
+                    let message = "User logged in through Facebook!"
+                    print(message)
+                    let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                    alertController.addAction(button)
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
             } else {
-                print("Uh oh. The user cancelled the Facebook login.")
+                let message = "Uh oh. The user cancelled the Facebook login."
+                print(message)
+                let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
