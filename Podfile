@@ -6,7 +6,6 @@ target 'Explora' do
 	pod 'MBProgressHUD', '~> 0.9.1'
   pod 'Parse'
   pod 'Mapbox-iOS-SDK'
-  pod 'INTULocationManager'
 end
 
 # disable bitcode in every sub-target for Mapbox

@@ -54,7 +54,6 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-Explora/AFNetworking.framework'
   install_framework 'Pods-Explora/Bolts.framework'
-  install_framework 'Pods-Explora/INTULocationManager.framework'
   install_framework 'Pods-Explora/MBProgressHUD.framework'
   install_framework 'Pods-Explora/Mapbox.framework'
   install_framework 'Pods-Explora/Parse.framework'
@@ -62,7 +61,6 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-Explora/AFNetworking.framework'
   install_framework 'Pods-Explora/Bolts.framework'
-  install_framework 'Pods-Explora/INTULocationManager.framework'
   install_framework 'Pods-Explora/MBProgressHUD.framework'
   install_framework 'Pods-Explora/Mapbox.framework'
   install_framework 'Pods-Explora/Parse.framework'
