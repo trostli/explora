@@ -44,4 +44,5 @@ extension PFUser : ExploraUser {
             self["participating_events"] = newValue
         }
     }
+
 }

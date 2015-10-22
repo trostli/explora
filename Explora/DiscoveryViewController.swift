@@ -13,10 +13,10 @@ import Parse
 class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
 
     @IBOutlet weak var mapView: MGLMapView!
-    
+
     var userLocation: PFGeoPoint?
     var events: NSArray?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +26,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         mapView.showsUserLocation = true
         mapView.delegate = self
 
-        getCurrentLocation()
+        getCurrentLocationAndEvents()
         view.addSubview(mapView)
     }
 
@@ -34,12 +34,11 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func getEvents() {
         var query = PFQuery(className:ExploraEvent.parseClassName())
         query.whereKey("event_location", nearGeoPoint:userLocation!)
         query.limit = 10
-        // Final list of objects
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 // The find succeeded.
@@ -58,7 +57,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
             }
         })
     }
-    
+
     func addEventsToMap() {
         if events != nil {
             for item in events! {
@@ -68,70 +67,58 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
             }
         }
     }
-    
+
     func addEventToMap(event: ExploraEvent){
         if event.eventLocation != nil {
-            let pin = MGLPointAnnotation()
+            let pin = ExploraPointAnnotation()
             let geoPoint = event.eventLocation!
             let coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)
             pin.coordinate = coordinate
             pin.title = "PARTY"
             pin.subtitle = "Lets grab some drinks guys"
-            
+            pin.eventId = event.objectId
+
             self.mapView.addAnnotation(pin)
         }
     }
-    
+
     // Should be move outside of controller to user model
-    func getCurrentLocation() {
+    func getCurrentLocationAndEvents() {
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
                 self.userLocation = geoPoint
                 let coordinate = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
-                
-                self.mapView.setCenterCoordinate(coordinate, zoomLevel: 12.0, animated: true)
-                
-                var event = ExploraEvent()
-                event.eventLocation = geoPoint
-                event.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        self.getEvents()
 
-                        print("The object has been saved.")
-                    } else {
-                        // There was a problem, check error.description
-                    }
-                }
+                self.mapView.setCenterCoordinate(coordinate, zoomLevel: 12.0, animated: true)
+                self.getEvents()
             }
         }
     }
-    
+
     // MARK: - Mapbox delegate
-    
+
     // Use the default marker; see our custom marker example for more information
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("people")
-        
+
         if annotationImage == nil {
-            // Leaning Tower of Pisa by Stefan Spieler from the Noun Project
             let image = UIImage(named: "people")
             annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: "people")
         }
 
         return annotationImage
     }
-    
+
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
-    
+
     func mapView(mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
-        print("callout")
-        self.performSegueWithIdentifier("detailSegue", sender: self)
+
+        self.performSegueWithIdentifier("detailSegue", sender: annotation)
     }
-    
+
     func mapView(mapView: MGLMapView, rightCalloutAccessoryViewForAnnotation annotation: MGLAnnotation) -> UIView? {
         let arrowButton = UIButton.init(type: UIButtonType.System) as UIButton
         arrowButton.frame = CGRectMake(50, 50, 50, 50)
@@ -142,14 +129,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         return arrowButton
     }
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let annotation = sender as! ExploraPointAnnotation
+        let vc = segue.destinationViewController as! EventDetailViewController
+        vc.eventId = annotation.eventId
     }
-    */
+
 
 }

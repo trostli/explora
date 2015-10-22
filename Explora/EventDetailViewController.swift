@@ -10,9 +10,12 @@ import UIKit
 
 class EventDetailViewController: UIViewController {
 
+    var eventId: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("\(eventId)")
         // Do any additional setup after loading the view.
     }
 
