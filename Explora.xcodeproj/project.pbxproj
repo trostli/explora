@@ -14,7 +14,7 @@
 		65A8541D1BD85713003090FD /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A8541C1BD85713003090FD /* EventDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8404812D1BCF55A8007A693E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404812C1BCF55A8007A693E /* AppDelegate.swift */; };
 		8404812F1BCF55A8007A693E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404812E1BCF55A8007A693E /* ViewController.swift */; };
-		840481321BCF55A9007A693E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840481301BCF55A8007A693E /* Main.storyboard */; };
+		840481321BCF55A9007A693E /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840481301BCF55A8007A693E /* Discovery.storyboard */; };
 		840481341BCF55A9007A693E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840481331BCF55A9007A693E /* Assets.xcassets */; };
 		840481371BCF55A9007A693E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840481351BCF55A9007A693E /* LaunchScreen.storyboard */; };
 		840481401BD3967A007A693E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404813F1BD3967A007A693E /* MapKit.framework */; };
@@ -36,7 +36,7 @@
 		840481291BCF55A8007A693E /* Explora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Explora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8404812C1BCF55A8007A693E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8404812E1BCF55A8007A693E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		840481311BCF55A8007A693E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		840481311BCF55A8007A693E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discovery.storyboard; sourceTree = "<group>"; };
 		840481331BCF55A9007A693E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840481361BCF55A9007A693E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		840481381BCF55A9007A693E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				8404812E1BCF55A8007A693E /* ViewController.swift */,
 				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
 				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
-				840481301BCF55A8007A693E /* Main.storyboard */,
+				840481301BCF55A8007A693E /* Discovery.storyboard */,
 				65A8541C1BD85713003090FD /* EventDetailViewController.swift */,
 				840481331BCF55A9007A693E /* Assets.xcassets */,
 				840481351BCF55A9007A693E /* LaunchScreen.storyboard */,
@@ -209,7 +209,7 @@
 				840481371BCF55A9007A693E /* LaunchScreen.storyboard in Resources */,
 				840481341BCF55A9007A693E /* Assets.xcassets in Resources */,
 				65A854131BD74675003090FD /* Credentials.plist in Resources */,
-				840481321BCF55A9007A693E /* Main.storyboard in Resources */,
+				840481321BCF55A9007A693E /* Discovery.storyboard in Resources */,
 				65A8541B1BD74ED1003090FD /* Settings.bundle in Resources */,
 				840481521BD3B3EB007A693E /* LoginFlow.storyboard in Resources */,
 			);
@@ -285,12 +285,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		840481301BCF55A8007A693E /* Main.storyboard */ = {
+		840481301BCF55A8007A693E /* Discovery.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				840481311BCF55A8007A693E /* Base */,
 			);
-			name = Main.storyboard;
+			name = Discovery.storyboard;
 			sourceTree = "<group>";
 		};
 		840481351BCF55A9007A693E /* LaunchScreen.storyboard */ = {

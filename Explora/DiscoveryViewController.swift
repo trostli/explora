@@ -110,13 +110,35 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     
     // Use the default marker; see our custom marker example for more information
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
-        return nil
+        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("people")
+        
+        if annotationImage == nil {
+            // Leaning Tower of Pisa by Stefan Spieler from the Noun Project
+            let image = UIImage(named: "people")
+            annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: "people")
+        }
+
+        return annotationImage
     }
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
+    
+    func mapView(mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+        print("callout")
+        self.performSegueWithIdentifier("detailSegue", sender: self)
+    }
+    
+    func mapView(mapView: MGLMapView, rightCalloutAccessoryViewForAnnotation annotation: MGLAnnotation) -> UIView? {
+        let arrowButton = UIButton.init(type: UIButtonType.System) as UIButton
+        arrowButton.frame = CGRectMake(50, 50, 50, 50)
 
+        let arrowImage = UIImage.init(named: "arrow") as UIImage?
+        arrowButton.setImage(arrowImage, forState: UIControlState.Normal)
+
+        return arrowButton
+    }
 
     /*
     // MARK: - Navigation
