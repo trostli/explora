@@ -48,7 +48,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3Y-xE-TV2" userLabel="Facebook Signin Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3Y-xE-TV2" userLabel="Facebook Signin Button" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="225" y="373" width="150" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Sign in with Facebook"/>
@@ -154,7 +154,7 @@
                                     <action selector="submitButtonPressed:" destination="TnQ-ru-sDe" eventType="touchUpInside" id="ZPh-x5-7BJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkI-a1-gbB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkI-a1-gbB" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="221" y="411" width="158" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Sign Up with Facebook"/>
