@@ -81,13 +81,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func testExploraEvent() {
-        let testObject = ExploraEvent()
-        testObject.eventTitle = "testing event"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
-        }
-    }
     /*
     // MARK: - Navigation
 
