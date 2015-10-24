@@ -18,8 +18,8 @@ import UIKit
 import Parse
 
 protocol ExploraUser {
-    var createdEvents: [NSString]? { get }
-    var participatingEvents: [NSString]? { get }
+    var createdEvents: [String]? { get }
+    var participatingEvents: [String]? { get }
 }
 
 extension PFUser : ExploraUser {
@@ -27,18 +27,18 @@ extension PFUser : ExploraUser {
     // email
     // password
     
-    var createdEvents: [NSString]? {
+    var createdEvents: [String]? {
         get {
-            return self["created_events"] as? [NSString]
+            return self["created_events"] as? [String]
         }
         set {
             self["created_events"] = newValue
         }
     }
     
-    var participatingEvents: [NSString]? {
+    var participatingEvents: [String]? {
         get {
-            return self["participating_events"] as? [NSString]
+            return self["participating_events"] as? [String]
         }
         set {
             self["participating_events"] = newValue
