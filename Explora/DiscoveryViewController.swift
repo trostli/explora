@@ -15,7 +15,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     @IBOutlet weak var mapView: MGLMapView!
     
     var userLocation: PFGeoPoint?
-    var events: [PFObject]?
+    var events: NSArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +36,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func getEvents() {
-        var query = PFQuery(className:"ExploraEvent")
-        query.whereKey("location", nearGeoPoint:userLocation!)
+        var query = PFQuery(className:ExploraEvent.parseClassName())
+        query.whereKey("event_location", nearGeoPoint:userLocation!)
         query.limit = 10
         // Final list of objects
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.events = objects
+                self.events = objects as? NSArray
                 print("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
                 self.addEventsToMap()
@@ -60,17 +60,19 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func addEventsToMap() {
-        if let events = events as? [PFObject]! {
-            for event in events {
-                addEventToMap(event)
+        if events != nil {
+            for item in events! {
+                if let event = item as? ExploraEvent {
+                    addEventToMap(event)
+                }
             }
         }
     }
     
-    func addEventToMap(event: PFObject){
-        if event["location"] != nil {
+    func addEventToMap(event: ExploraEvent){
+        if event.eventLocation != nil {
             let pin = MGLPointAnnotation()
-            let geoPoint = event["location"] as! PFGeoPoint
+            let geoPoint = event.eventLocation!
             let coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)
             pin.coordinate = coordinate
             pin.title = "PARTY"
@@ -90,14 +92,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
                 
                 self.mapView.setCenterCoordinate(coordinate, zoomLevel: 12.0, animated: true)
                 
-                var event = PFObject(className:"ExploraEvent")
-                event["location"] = geoPoint
+                var event = ExploraEvent()
+                event.eventLocation = geoPoint
                 event.saveInBackgroundWithBlock {
                     (success: Bool, error: NSError?) -> Void in
                     if (success) {
                         self.getEvents()
 
-                        // The object has been saved.
+                        print("The object has been saved.")
                     } else {
                         // There was a problem, check error.description
                     }
