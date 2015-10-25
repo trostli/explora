@@ -10,12 +10,22 @@ import UIKit
 
 class EventDetailViewController: UIViewController {
 
-    var eventId: String!
+    var event: ExploraEvent!
+    
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventMeetingTimeLabel: UILabel!
+    @IBOutlet weak var eventAddressLabel: UILabel!
+    @IBOutlet weak var eventDescriptionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("\(eventId)")
+        eventTitleLabel.text = event.eventTitle
+        eventDescriptionLabel.text = event.eventDescription
+        eventAddressLabel.text = "123 Townsend St"
+        eventMeetingTimeLabel.text = "\(event.meetingStartTime)"
+        
+        print("\(event.objectId)")
         // Do any additional setup after loading the view.
     }
 
@@ -25,6 +35,10 @@ class EventDetailViewController: UIViewController {
     }
     
 
+    @IBAction func onJoinTap(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

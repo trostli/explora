@@ -11,7 +11,26 @@ import Mapbox
 
 class ExploraPointAnnotation: MGLPointAnnotation {
     
-    var eventId: String?
     var event: ExploraEvent?
+    
+    convenience init(event: ExploraEvent) {
+        self.init()
+        
+        self.event = event
+        
+        if event.eventLocation != nil {
+            self.coordinate = event.eventCoordinate!
+        }
+        
+        if event.eventTitle != nil {
+            self.title = event.eventTitle!
+        } else {
+            self.title = "(no title)"
+        }
+        
+        if event.eventDescription != nil {
+            self.subtitle = event.eventDescription!
+        }
+    }
     
 }

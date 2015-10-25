@@ -14,7 +14,6 @@
     - array of event ids user is participating in
 */
 
-import UIKit
 import Parse
 
 protocol ExploraUser {
@@ -26,6 +25,8 @@ extension PFUser : ExploraUser {
     // username
     // email
     // password
+    
+    @NSManaged var lastKnownLocation: PFGeoPoint?
     
     var createdEvents: [String]? {
         get {
@@ -44,5 +45,29 @@ extension PFUser : ExploraUser {
             self["participating_events"] = newValue
         }
     }
+    
+    // MARK: - Location
+    
+    // Synchronize the user's location with Parse
+    func updateLocation() {
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                self.lastKnownLocation = geoPoint
+                
+                // Update Parse last known location for the current user
+                PFUser.currentUser()?.setObject(geoPoint!, forKey: "lastKnownLocation")
+                PFUser.currentUser()?.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        print("lastKnownLocation successfully updated")
+                    } else {
+                        print("\(error)")
+                    }
+                }
+
+            }
+        }
+    }
+
 
 }

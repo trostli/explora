@@ -15,8 +15,10 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     @IBOutlet weak var mapView: MGLMapView!
 
     var userLocation: PFGeoPoint?
-    var events: NSArray?
-
+    var events: [ExploraEvent]?
+    
+    @IBOutlet weak var locationButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,9 +27,19 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         mapView = MGLMapView(frame: view.bounds, styleURL: styleURL)
         mapView.showsUserLocation = true
         mapView.delegate = self
+        
 
-        getCurrentLocationAndEvents()
         view.addSubview(mapView)
+        view.sendSubviewToBack(mapView)
+
+        showCurrentLocationAndEvents()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        locationButton.layer.cornerRadius = 25
+        locationButton.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,22 +47,19 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    func getEvents() {
-        var query = PFQuery(className:ExploraEvent.parseClassName())
-        query.whereKey("event_location", nearGeoPoint:userLocation!)
+    @IBAction func onLocationTap(sender: UIButton) {
+        showCurrentLocationAndEvents()
+    }
+    
+    func getEvents(nearGeoPoint: PFGeoPoint) {
+        let query = PFQuery(className:ExploraEvent.parseClassName())
+        query.whereKey("event_location", nearGeoPoint:nearGeoPoint)
         query.limit = 10
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                // The find succeeded.
-                self.events = objects as? NSArray
-                print("Successfully retrieved \(objects!.count) scores.")
-                // Do something with the found objects
+                self.events = objects as? [ExploraEvent]
+                print("Successfully retrieved \(objects!.count) events.")
                 self.addEventsToMap()
-                if let objects = objects as? [PFObject]! {
-                    for object in objects {
-                        print(object.objectId)
-                    }
-                }
             } else {
                 // Log details of the failure
                 print("Error: \(error!) \(error!.userInfo)")
@@ -60,39 +69,34 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
 
     func addEventsToMap() {
         if events != nil {
-            for item in events! {
-                if let event = item as? ExploraEvent {
-                    addEventToMap(event)
-                }
+            for event in events! {
+                addEventToMap(event)
             }
         }
     }
 
     func addEventToMap(event: ExploraEvent){
         if event.eventLocation != nil {
-            let pin = ExploraPointAnnotation()
-            let geoPoint = event.eventLocation!
-            let coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)
-            pin.coordinate = coordinate
-            pin.title = "PARTY"
-            pin.subtitle = "Lets grab some drinks guys"
-            pin.eventId = event.objectId
-
+            let pin = ExploraPointAnnotation.init(event: event)
+//            pin.event = event
+//            print("title \(event.eventTitle)")
             self.mapView.addAnnotation(pin)
         }
     }
 
-    // Should be move outside of controller to user model
-    func getCurrentLocationAndEvents() {
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                self.userLocation = geoPoint
-                let coordinate = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
-
-                self.mapView.setCenterCoordinate(coordinate, zoomLevel: 12.0, animated: true)
-                self.getEvents()
-            }
+    func showCurrentLocationAndEvents() {
+        let lastKnownLocation = PFUser.currentUser()?.lastKnownLocation
+        
+        if lastKnownLocation != nil {
+            let coordinates = CLLocationCoordinate2DMake(lastKnownLocation!.latitude, lastKnownLocation!.longitude)
+            self.mapView.setCenterCoordinate(coordinates, zoomLevel: 12.0, animated: true)
+            self.getEvents(lastKnownLocation!)
+        } else {
+        PFGeoPoint.geoPointForCurrentLocationInBackground({ (geopoint: PFGeoPoint?, error: NSError?) -> Void in
+                let coordinates = CLLocationCoordinate2DMake(geopoint!.latitude, geopoint!.longitude)
+                self.mapView.setCenterCoordinate(coordinates, zoomLevel: 12.0, animated: true)
+                self.getEvents(geopoint!)
+            })
         }
     }
 
@@ -111,7 +115,11 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
 
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        return true
+        if annotation is ExploraPointAnnotation {
+            return true
+        } else {
+            return false
+        }
     }
 
     func mapView(mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
@@ -135,7 +143,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let annotation = sender as! ExploraPointAnnotation
         let vc = segue.destinationViewController as! EventDetailViewController
-        vc.eventId = annotation.eventId
+        vc.event = annotation.event
     }
 
 

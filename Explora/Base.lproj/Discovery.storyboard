@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Delegate-->
+        <!--Discovery View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DiscoveryViewController" customModule="Explora" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,25 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ija-qA-F8N" customClass="MGLMapView">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yo6-zg-2rY">
+                                <rect key="frame" x="526" y="20" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.42352941179999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="1R2-WC-pMD"/>
+                                    <constraint firstAttribute="height" constant="60" id="Jdv-ln-E18"/>
+                                </constraints>
+                                <state key="normal" title="Location"/>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hxg-p4-sci"/>
+                                    <action selector="onLocationTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hKK-f3-fjk"/>
                                 </connections>
-                            </view>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ija-qA-F8N" secondAttribute="bottom" id="7SY-5F-Vlb"/>
-                            <constraint firstItem="ija-qA-F8N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EIT-50-bSP"/>
-                            <constraint firstAttribute="trailing" secondItem="ija-qA-F8N" secondAttribute="trailing" id="LEU-ar-AKY"/>
-                            <constraint firstItem="ija-qA-F8N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Z7u-Nk-a1Q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yo6-zg-2rY" secondAttribute="trailing" id="YI0-WS-6ZJ"/>
+                            <constraint firstItem="yo6-zg-2rY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mos-8k-h0R"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="ija-qA-F8N" id="Sm6-ZY-NvC"/>
-                        <segue destination="iAC-yU-Nkj" kind="show" identifier="detailSegue" id="age-Qa-w7I"/>
+                        <outlet property="locationButton" destination="yo6-zg-2rY" id="wIk-As-AKr"/>
+                        <segue destination="iAC-yU-Nkj" kind="presentation" identifier="detailSegue" modalTransitionStyle="partialCurl" id="age-Qa-w7I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -80,6 +83,9 @@
                                     <constraint firstAttribute="height" constant="55" id="XOq-dJ-xxB"/>
                                 </constraints>
                                 <state key="normal" title="Join"/>
+                                <connections>
+                                    <action selector="onJoinTap:" destination="iAC-yU-Nkj" eventType="touchUpInside" id="dze-mz-9ME"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Come join me in a scenic hike to the top of Coit Tower! We will check out place ins North Beach afterwards." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-tm-JZh">
                                 <rect key="frame" x="20" y="374" width="532" height="34"/>
@@ -114,6 +120,12 @@
                             <constraint firstItem="clU-dM-7vg" firstAttribute="top" secondItem="IDT-fP-8Tj" secondAttribute="bottom" id="xnx-bv-S1p"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="eventAddressLabel" destination="ahY-8G-a3l" id="afw-FA-Vks"/>
+                        <outlet property="eventDescriptionLabel" destination="4dz-tm-JZh" id="Q42-0X-Fwi"/>
+                        <outlet property="eventMeetingTimeLabel" destination="4Em-6h-RI2" id="HbI-LE-Obw"/>
+                        <outlet property="eventTitleLabel" destination="o0B-Mn-FSV" id="wDg-jQ-39M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yPR-Sa-o7d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
