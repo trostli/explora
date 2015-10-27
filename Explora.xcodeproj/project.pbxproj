@@ -10,6 +10,8 @@
 		062A3D55F87FA6F4CB6C5F08 /* Pods_Explora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72B4C40C9A988AC31761544 /* Pods_Explora.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		233DD2C61BD897A000DD3190 /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 233DD2C41BD897A000DD3190 /* CreateEvent.storyboard */; settings = {ASSET_TAGS = (); }; };
 		233DD2C71BD897A000DD3190 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DD2C51BD897A000DD3190 /* CreateEventViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2382AA1C1BD98CA000FF90E2 /* AddEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2382AA1B1BD98CA000FF90E2 /* AddEventDetailsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		23D2BBBC1BDC975800ED1D6B /* DateTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D2BBBB1BDC975800ED1D6B /* DateTableTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		65A854131BD74675003090FD /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A854121BD74675003090FD /* Credentials.plist */; settings = {ASSET_TAGS = (); }; };
 		65A854171BD74B54003090FD /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A854161BD74B54003090FD /* DiscoveryViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		65A8541B1BD74ED1003090FD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65A8541A1BD74ED1003090FD /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
@@ -33,6 +35,8 @@
 		02EDA61D1230A10DA55F5559 /* Pods-Explora.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explora.release.xcconfig"; path = "Pods/Target Support Files/Pods-Explora/Pods-Explora.release.xcconfig"; sourceTree = "<group>"; };
 		233DD2C41BD897A000DD3190 /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		233DD2C51BD897A000DD3190 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		2382AA1B1BD98CA000FF90E2 /* AddEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDetailsViewController.swift; sourceTree = "<group>"; };
+		23D2BBBB1BDC975800ED1D6B /* DateTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTableTableViewController.swift; sourceTree = "<group>"; };
 		55B517AB83F9FF3B15E38BB2 /* Pods-Explora.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explora.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explora/Pods-Explora.debug.xcconfig"; sourceTree = "<group>"; };
 		65A854121BD74675003090FD /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		65A854161BD74B54003090FD /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				233DD2C41BD897A000DD3190 /* CreateEvent.storyboard */,
+				23D2BBBB1BDC975800ED1D6B /* DateTableTableViewController.swift */,
+				2382AA1B1BD98CA000FF90E2 /* AddEventDetailsViewController.swift */,
 				233DD2C51BD897A000DD3190 /* CreateEventViewController.swift */,
 				840481471BD398A7007A693E /* Credentials.swift */,
 				8404814D1BD3B22D007A693E /* ExploraClient.swift */,
@@ -176,6 +182,10 @@
 		840481211BCF55A8007A693E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					1,
+					2,
+				);
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "explora-codepath";
 				TargetAttributes = {
@@ -291,6 +301,8 @@
 				233DD2C71BD897A000DD3190 /* CreateEventViewController.swift in Sources */,
 				840481481BD398A7007A693E /* Credentials.swift in Sources */,
 				65A854171BD74B54003090FD /* DiscoveryViewController.swift in Sources */,
+				23D2BBBC1BDC975800ED1D6B /* DateTableTableViewController.swift in Sources */,
+				2382AA1C1BD98CA000FF90E2 /* AddEventDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
