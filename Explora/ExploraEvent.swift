@@ -96,6 +96,15 @@ class ExploraEvent: PFObject, PFSubclassing {
         }
     }
     
+    var eventAddress: String? {
+        get {
+            return self["event_address"] as? String
+        }
+        set {
+            self["event_address"] = newValue
+        }
+    }
+    
     var eventCoordinate: CLLocationCoordinate2D? {
         if eventLocation != nil {
             return CLLocationCoordinate2DMake(eventLocation!.latitude, eventLocation!.longitude)

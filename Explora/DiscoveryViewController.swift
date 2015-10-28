@@ -12,15 +12,27 @@ import Parse
 
 class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
 
-    @IBOutlet weak var mapView: MGLMapView!
+    weak var mapView: MGLMapView!
 
     var userLocation: PFGeoPoint?
     var events: [ExploraEvent]?
+    var inSetLocationMode: Bool?
     
-    @IBOutlet weak var locationButton: UIButton!
+    let geoCoder = CLGeocoder()
+    
+    private var _newEventAddressString: String?
+    let eventLocationTextView = UITextView()
+    @IBOutlet weak var setLocationButtonHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var setLocationStackView: UIStackView!
+    @IBOutlet weak var currentLocationButton: UIButton!
+    @IBOutlet weak var createEventButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        inSetLocationMode = false
+        setLocationStackView.hidden = true
 
         // initialize the map view
         let styleURL = NSURL(string: "asset://styles/light-v8.json")
@@ -28,6 +40,12 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         mapView.showsUserLocation = true
         mapView.delegate = self
         
+        // intialize text view
+        eventLocationTextView.backgroundColor = UIColor.whiteColor()
+        eventLocationTextView.frame = CGRectMake(10, 40, 300, 40)
+        eventLocationTextView.editable = false
+        eventLocationTextView.hidden = true
+        self.view.addSubview(eventLocationTextView)
 
         view.addSubview(mapView)
         view.sendSubviewToBack(mapView)
@@ -38,17 +56,83 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        locationButton.layer.cornerRadius = 25
-        locationButton.clipsToBounds = true
+        currentLocationButton.layer.cornerRadius = 25
+        currentLocationButton.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onLocationTap(sender: UIButton) {
+    @IBAction func onCreateEventTap(sender: UIButton) {
+        transitionToCreateEventMode()
+    }
+    
+    @IBAction func onCurrentLocationTap(sender: UIButton) {
         showCurrentLocationAndEvents()
+    }
+    
+    @IBAction func onSetLocationTap(sender: UIButton) {
+        let newEvent = ExploraEvent()
+        if _newEventAddressString != nil {
+            newEvent.eventAddress = _newEventAddressString!
+        }
+        
+        newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+
+        // Perform segue to create event details VC here and pass newEvent
+        print("Perform segue to Create Event Details VC ")
+    }
+    
+    func transitionToCreateEventMode() {
+        inSetLocationMode = true
+        createEventButton.hidden = true
+        setLocationStackView.hidden = false
+        eventLocationTextView.hidden = false
+    }
+    
+    func getAddressStringFromCoords(coordinate: CLLocationCoordinate2D) {
+        var placemark:CLPlacemark!
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        geoCoder.reverseGeocodeLocation(location) { (placemarks, error) -> Void in
+            if error != nil {
+                print("Reverse Geocode failed with error: \(error!.localizedDescription)")
+            } else {
+                if placemarks!.count > 0 {
+                    placemark = CLPlacemark(placemark: (placemarks?.first)!)
+                    
+                    let newEventFormattedAddressArray = placemark.addressDictionary?["FormattedAddressLines"] as? NSArray
+                    self._newEventAddressString = newEventFormattedAddressArray?.componentsJoinedByString("\n")
+                    if let street = placemark.addressDictionary?["Name"] as? NSString {
+                        self.updateLocationInTextView(street)
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateLocationInTextView(locationString: NSString) {
+        let titleString = "Event Location"
+        //let locationString = getLocStringFromCoords(newLocCoords)
+        
+        
+        let textString = "\(titleString)\n\(locationString)"
+        let attrText = NSMutableAttributedString(string: textString)
+        
+        let largeFont = UIFont(name: "Arial", size: 14.0)!
+        let smallFont = UIFont(name: "Arial", size: 11.0)!
+        
+        //  Convert textString to NSString because attrText.addAttribute takes an NSRange.
+        let titleTextRange = (textString as NSString).rangeOfString(titleString)
+        let locationTextRange = (textString as NSString).rangeOfString(locationString as String)
+        
+        attrText.addAttribute(NSFontAttributeName, value: smallFont, range: titleTextRange)
+        attrText.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: titleTextRange)
+        attrText.addAttribute(NSFontAttributeName, value: largeFont, range: locationTextRange)
+        
+        eventLocationTextView.attributedText = attrText
+        eventLocationTextView.textAlignment = .Center
+        
     }
     
     func getEvents(nearGeoPoint: PFGeoPoint) {
@@ -78,8 +162,6 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     func addEventToMap(event: ExploraEvent){
         if event.eventLocation != nil {
             let pin = ExploraPointAnnotation.init(event: event)
-//            pin.event = event
-//            print("title \(event.eventTitle)")
             self.mapView.addAnnotation(pin)
         }
     }
@@ -136,7 +218,12 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
 
         return arrowButton
     }
-
+    
+    func mapView(mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+        if self.inSetLocationMode == true {
+            getAddressStringFromCoords(mapView.centerCoordinate)
+        }
+    }
 
     // MARK: - Navigation
 
