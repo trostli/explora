@@ -40,8 +40,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         user.email = self.emailField.text
         
         // other fields can be set just like with PFObject
-        user.createdEvents = ["blahblah", "meh"]
-        user.participatingEvents = ["testing", "hah"]
+        user.createdEvents = []
+        user.participatingEvents = []
         
         user.signUpInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
@@ -49,9 +49,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 let errorString = error.userInfo["error"] as? NSString
                 // Show the errorString somewhere and let the user try again.
                 print (errorString)
+                let alertController = UIAlertController(title: "Error Signing Up", message: error.description, preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 // Hooray! Let them use the app now.
                 print ("success signing up")
+                let alertController = UIAlertController(title: "Success", message: "Sign up was successful!", preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -99,11 +107,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             valid = false
             errorMessage = "Please fill in a password."
         }
-        
-        let alertController = UIAlertController(title: "Error Signing Up", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alertController.addAction(button)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        if !valid {
+            let alertController = UIAlertController(title: "Error Signing Up", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(button)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
         
         return valid
     }
