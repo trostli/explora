@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZR-vk-J4o">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Profile View Controller-->
@@ -31,6 +32,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8S-oK-6sh" userLabel="Hosting Label">
+                                <rect key="frame" x="20" y="217" width="60" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BOW-ht-dJs">
                                 <rect key="frame" x="0.0" y="246" width="600" height="354"/>
                                 <animations/>
@@ -40,9 +48,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BOW-ht-dJs" firstAttribute="top" secondItem="w8S-oK-6sh" secondAttribute="bottom" constant="8" id="1N3-1F-m2f"/>
                             <constraint firstItem="BOW-ht-dJs" firstAttribute="top" secondItem="cdP-Qd-maS" secondAttribute="bottom" constant="63.5" id="4a0-6C-86q"/>
                             <constraint firstItem="cdP-Qd-maS" firstAttribute="centerX" secondItem="W2u-yy-Rti" secondAttribute="centerX" id="6YZ-Fz-x0D"/>
                             <constraint firstItem="1P7-dw-xUa" firstAttribute="top" secondItem="BOW-ht-dJs" secondAttribute="bottom" id="9Ad-bo-E95"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="w8S-oK-6sh" secondAttribute="leading" id="Gfp-AV-ZGH"/>
                             <constraint firstItem="HgD-qs-klX" firstAttribute="centerX" secondItem="W2u-yy-Rti" secondAttribute="centerX" id="Kdc-QX-Y9a"/>
                             <constraint firstItem="HgD-qs-klX" firstAttribute="top" secondItem="9xc-lS-peT" secondAttribute="bottom" constant="46" id="KmV-Nl-DJ7"/>
                             <constraint firstItem="BOW-ht-dJs" firstAttribute="leading" secondItem="W2u-yy-Rti" secondAttribute="leading" id="dW5-Zd-DKd"/>

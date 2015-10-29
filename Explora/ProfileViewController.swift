@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import AFNetworking
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -15,9 +16,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var user: PFUser? {
+    var user: PFUser! {
         didSet {
-            usernameLabel.text = user?.username
+            if let url = user.pictureURL {
+                self.profileImageView.setImageWithURL(NSURL(string: url)!)
+            }
+            if let name = user.firstName {
+                self.usernameLabel.text = name
+            } else {
+                self.usernameLabel.text = user.username
+            }
         }
     }
     
@@ -45,11 +53,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return user.createdEvents?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+        if let events = user!.createdEvents {
+            cell.textLabel?.text = events[indexPath.row]
+        }
         return cell
     }
 
