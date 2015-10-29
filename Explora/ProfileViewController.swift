@@ -16,15 +16,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var user: PFUser! {
+    var user: PFUser? {
         didSet {
-            if let url = user.pictureURL {
+            if let url = user!.pictureURL {
                 self.profileImageView.setImageWithURL(NSURL(string: url)!)
             }
-            if let name = user.firstName {
+            if let name = user!.firstName {
                 self.usernameLabel.text = name
             } else {
-                self.usernameLabel.text = user.username
+                self.usernameLabel.text = user!.username
             }
         }
     }
@@ -37,8 +37,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        user = PFUser.currentUser()
-        
+        if (user == nil) {
+            PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+                if (error == nil) {
+                    if let updatedUser = object as? PFUser {
+                        self.user = updatedUser
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            })
+            self.user = PFUser.currentUser()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,12 +64,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return user.createdEvents?.count ?? 0
+        return user?.createdEvents?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
-        if let events = user!.createdEvents {
+        if let events = user?.createdEvents {
             cell.textLabel?.text = events[indexPath.row]
         }
         return cell
