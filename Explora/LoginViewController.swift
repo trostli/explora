@@ -8,6 +8,7 @@
 
 import UIKit
 import ParseFacebookUtilsV4
+import FBSDKCoreKit
 
 class LoginViewController: UIViewController {
     
@@ -31,6 +32,7 @@ class LoginViewController: UIViewController {
             if let user = user {
                 if user.isNew {
                     let message = "User signed up and logged in through Facebook!"
+                    self.getUserInfo()
                     print(message)
                     let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                     let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
@@ -68,6 +70,21 @@ class LoginViewController: UIViewController {
                 // The login failed. Check error to see why.
                 print(error)
             }
+        }
+    }
+    
+    func getUserInfo() {
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil) {
+                    let dict = result as! NSDictionary
+                    if let user = PFUser.currentUser() {
+                        user.firstName = dict["first_name"] as? String
+                        user.pictureURL = dict.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String
+                        user.saveEventually()
+                    }
+                }
+            })
         }
     }
     

@@ -12,6 +12,7 @@ import ParseFacebookUtilsV4
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
@@ -29,8 +30,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func submitButtonPressed(sender: AnyObject) {
+        if (!validateFields()) {
+            // Do nothing if fields are not valid
+            return;
+        }
         let user = PFUser()
-        user.username = self.emailField.text
+        user.username = self.usernameField.text
         user.password = self.passwordField.text
         user.email = self.emailField.text
         
@@ -79,6 +84,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func validateFields() -> Bool {
+        var valid = true
+        var errorMessage = ""
+        if (self.usernameField.text == "") {
+            valid = false
+            errorMessage = "Please fill in a user name."
+        } else if (self.emailField.text == "") {
+            valid = false
+            errorMessage = "Please fill in an email."
+        } else if (self.passwordField.text == "") {
+            valid = false
+            errorMessage = "Please fill in a password."
+        }
+        
+        let alertController = UIAlertController(title: "Error Signing Up", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(button)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        return valid
     }
     
     /*

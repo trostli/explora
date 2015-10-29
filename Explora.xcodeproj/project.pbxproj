@@ -102,12 +102,10 @@
 				65A8541A1BD74ED1003090FD /* Settings.bundle */,
 				840481411BD39704007A693E /* Models */,
 				840481461BD39898007A693E /* API */,
+				8466D3FE1BE1A644006FDCEB /* Login */,
 				8472035F1BDF04C1004ECE70 /* Profile */,
 				8404812C1BCF55A8007A693E /* AppDelegate.swift */,
 				8404812E1BCF55A8007A693E /* ViewController.swift */,
-				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
-				840481541BD844A3007A693E /* LoginViewController.swift */,
-				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
 				840481301BCF55A8007A693E /* Discovery.storyboard */,
 				65A8541C1BD85713003090FD /* EventDetailViewController.swift */,
 				840481331BCF55A9007A693E /* Assets.xcassets */,
@@ -137,11 +135,21 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		8466D3FE1BE1A644006FDCEB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
+				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
+				840481541BD844A3007A693E /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		8472035F1BDF04C1004ECE70 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				847203601BDF08F5004ECE70 /* ProfileViewController.swift */,
 				84CC38401BDF287200540453 /* Profile.storyboard */,
+				847203601BDF08F5004ECE70 /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
