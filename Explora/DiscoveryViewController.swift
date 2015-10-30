@@ -12,7 +12,7 @@ import Parse
 
 class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
 
-    weak var mapView: MGLMapView!
+    weak var mapView: ExploraMapView!
 
     var userLocation: PFGeoPoint?
     var events: [ExploraEvent]?
@@ -21,12 +21,13 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     let geoCoder = CLGeocoder()
     
     private var _newEventAddressString: String?
-    let eventLocationTextView = UITextView()
     @IBOutlet weak var setLocationButtonHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var eventLocationTextView: UITextView!
     @IBOutlet weak var setLocationStackView: UIStackView!
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var createEventButton: UIButton!
+    @IBOutlet weak var listEventsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,18 +36,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
         setLocationStackView.hidden = true
 
         // initialize the map view
-        let styleURL = NSURL(string: "asset://styles/light-v8.json")
-        mapView = MGLMapView(frame: view.bounds, styleURL: styleURL)
+        let styleURL = NSURL(string: "asset://styles/emerald-v8.json")
+        mapView = ExploraMapView(frame: view.bounds, styleURL: styleURL)
         mapView.showsUserLocation = true
         mapView.delegate = self
         
         // intialize text view
-        eventLocationTextView.backgroundColor = UIColor.whiteColor()
-        eventLocationTextView.frame = CGRectMake(10, 40, 300, 40)
-        eventLocationTextView.editable = false
         eventLocationTextView.hidden = true
-        self.view.addSubview(eventLocationTextView)
-
+        
         view.addSubview(mapView)
         view.sendSubviewToBack(mapView)
 
@@ -65,7 +62,11 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
 
     @IBAction func onCreateEventTap(sender: UIButton) {
-        transitionToCreateEventMode()
+        if inSetLocationMode == false {
+            transitionToCreateEventMode()
+        } else {
+            transitionOutOfCreateEventMode()
+        }
     }
     
     @IBAction func onCurrentLocationTap(sender: UIButton) {
@@ -86,9 +87,30 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     
     func transitionToCreateEventMode() {
         inSetLocationMode = true
-        createEventButton.hidden = true
+        
+        self.createEventButton.imageView!.image = self.createEventButton.imageView!.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.7, options: .CurveEaseIn, animations: { () -> Void in
+            self.createEventButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI)/4.0 * 3.0)
+            self.listEventsButton.transform = CGAffineTransformMakeTranslation(75.0, -75.0)
+            }, completion: nil)
+        
         setLocationStackView.hidden = false
         eventLocationTextView.hidden = false
+        events = nil
+    }
+    
+    func transitionOutOfCreateEventMode() {
+        inSetLocationMode = false
+        
+        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+            self.createEventButton.transform = CGAffineTransformMakeRotation(0.0)
+            self.listEventsButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+            }, completion: nil)
+        
+        setLocationStackView.hidden = true
+        eventLocationTextView.hidden = true
+        showCurrentLocationAndEvents()
     }
     
     func getAddressStringFromCoords(coordinate: CLLocationCoordinate2D) {
@@ -154,15 +176,8 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     func addEventsToMap() {
         if events != nil {
             for event in events! {
-                addEventToMap(event)
+                mapView.addEventToMap(event)
             }
-        }
-    }
-
-    func addEventToMap(event: ExploraEvent){
-        if event.eventLocation != nil {
-            let pin = ExploraPointAnnotation.init(event: event)
-            self.mapView.addAnnotation(pin)
         }
     }
 

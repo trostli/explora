@@ -16,7 +16,6 @@ import Mapbox
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var locationManager: CLLocationManager?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,15 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         MGLAccountManager.setAccessToken(Credentials.defaultCredentials.mapboxKey)
         
-        // Request location authorization if needed and update the user's location
-//        locationManager = CLLocationManager()
-//        if (CLLocationManager.locationServicesEnabled()) {
-//            locationManager!.delegate = self
-//            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-//            locationManager!.requestWhenInUseAuthorization()
-//            locationManager!.startUpdatingLocation()
-//        }
-
         return true
     }
 
