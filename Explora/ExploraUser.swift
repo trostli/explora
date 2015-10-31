@@ -19,6 +19,8 @@ import Parse
 protocol ExploraUser {
     var createdEvents: [String]? { get }
     var participatingEvents: [String]? { get }
+    var firstName: String? { get }
+    var pictureURL: String? { get }
 }
 
 extension PFUser : ExploraUser {
@@ -46,6 +48,24 @@ extension PFUser : ExploraUser {
         }
     }
     
+    var firstName: String? {
+        get {
+            return self["first_name"] as? String
+        }
+        set {
+            self["first_name"] = newValue
+        }
+    }
+    
+    var pictureURL: String? {
+        get {
+            return self["picture_url"] as? String
+        }
+        set {
+            self["picture_url"] = newValue
+        }
+    }
+
     // MARK: - Location
     
     // Synchronize the user's location with Parse
@@ -68,6 +88,5 @@ extension PFUser : ExploraUser {
             }
         }
     }
-
 
 }

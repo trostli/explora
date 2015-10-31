@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZR-vk-J4o">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="c0s-Aa-BoO">
+            <objects>
+                <viewController storyboardIdentifier="UserProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BZR-vk-J4o" customClass="ProfileViewController" customModule="Explora" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9xc-lS-peT"/>
+                        <viewControllerLayoutGuide type="bottom" id="1P7-dw-xUa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W2u-yy-Rti">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BOW-ht-dJs">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.2562442492" green="0.85570474789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.2562442492" green="0.85570474789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="BOW-ht-dJs" firstAttribute="top" secondItem="9xc-lS-peT" secondAttribute="bottom" id="8wt-5a-iPQ"/>
+                            <constraint firstItem="1P7-dw-xUa" firstAttribute="top" secondItem="BOW-ht-dJs" secondAttribute="bottom" id="9Ad-bo-E95"/>
+                            <constraint firstItem="BOW-ht-dJs" firstAttribute="leading" secondItem="W2u-yy-Rti" secondAttribute="leading" id="dW5-Zd-DKd"/>
+                            <constraint firstAttribute="trailing" secondItem="BOW-ht-dJs" secondAttribute="trailing" id="hNK-Wx-O8G"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="BOW-ht-dJs" id="Pxd-hO-bgg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bs2-2X-lFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="187"/>
+        </scene>
+    </scenes>
+</document>

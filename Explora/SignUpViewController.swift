@@ -12,6 +12,7 @@ import ParseFacebookUtilsV4
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
@@ -29,14 +30,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func submitButtonPressed(sender: AnyObject) {
+        if (!validateFields()) {
+            // Do nothing if fields are not valid
+            return;
+        }
         let user = PFUser()
-        user.username = self.emailField.text
+        user.username = self.usernameField.text
         user.password = self.passwordField.text
         user.email = self.emailField.text
         
         // other fields can be set just like with PFObject
-        user.createdEvents = ["blahblah", "meh"]
-        user.participatingEvents = ["testing", "hah"]
+        user.createdEvents = []
+        user.participatingEvents = []
         
         user.signUpInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
@@ -44,9 +49,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 let errorString = error.userInfo["error"] as? NSString
                 // Show the errorString somewhere and let the user try again.
                 print (errorString)
+                let alertController = UIAlertController(title: "Error Signing Up", message: error.description, preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 // Hooray! Let them use the app now.
                 print ("success signing up")
+                let alertController = UIAlertController(title: "Success", message: "Sign up was successful!", preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -79,6 +92,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func validateFields() -> Bool {
+        var valid = true
+        var errorMessage = ""
+        if (self.usernameField.text == "") {
+            valid = false
+            errorMessage = "Please fill in a user name."
+        } else if (self.emailField.text == "") {
+            valid = false
+            errorMessage = "Please fill in an email."
+        } else if (self.passwordField.text == "") {
+            valid = false
+            errorMessage = "Please fill in a password."
+        }
+        if !valid {
+            let alertController = UIAlertController(title: "Error Signing Up", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(button)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        return valid
     }
     
     /*
