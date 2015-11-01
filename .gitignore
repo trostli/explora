@@ -38,5 +38,5 @@ Carthage/Build
 # Project specific
 Credentials.plist
 Explora/Credentials.plist
-Explora.xcodeproj/project.pbxproj
+
 
