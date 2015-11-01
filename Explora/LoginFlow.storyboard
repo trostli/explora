@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xDl-Zk-yWP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xDl-Zk-yWP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--Sign In to Explora-->
@@ -63,7 +63,7 @@
                                 <animations/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="TnQ-ru-sDe" kind="show" id="eXE-9s-KhP"/>
+                                    <segue destination="TnQ-ru-sDe" kind="show" identifier="SignUp" id="eXE-9s-KhP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qob-XY-zzs" userLabel="Signin Button">
@@ -96,7 +96,13 @@
                             <constraint firstItem="WWK-AX-81h" firstAttribute="centerX" secondItem="RqT-w0-Qwh" secondAttribute="centerX" id="uUc-5K-Lb6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="LJl-kz-ERt"/>
+                    <navigationItem key="navigationItem" title="Login" id="99L-iY-sda">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qN5-E4-EYX">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="zDw-8S-bcn" id="a2I-Lh-ob1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="passwordField" destination="7zc-aH-2GO" id="IXA-Ag-mMe"/>
                         <outlet property="usernameField" destination="WWK-AX-81h" id="sFs-j4-VWQ"/>

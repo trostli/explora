@@ -8,8 +8,9 @@
 
 import UIKit
 import Mapbox
+import Parse
 
-class EventDetailViewController: UIViewController, MGLMapViewDelegate {
+class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDelegate {
 
     var event: ExploraEvent!
     weak var mapView: ExploraMapView!
@@ -54,7 +55,23 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate {
     
 
     @IBAction func onJoinTap(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if PFUser.currentUser() != nil {
+            
+        } else {
+            let storyboard = UIStoryboard(name: "LoginFlow", bundle: nil)
+            if let loginNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
+                if let loginVc = loginNavVC.topViewController as? LoginViewController {
+                    loginVc.delegate = self;
+                }
+                self.presentViewController(loginNavVC, animated: true, completion: nil)
+            }
+        }
+    }
+
+    // MARK: - Login delegate
+    
+    func handleLoginSuccess(user: PFUser) {
+        print(user)
     }
     
     // MARK: - Mapbox delegate

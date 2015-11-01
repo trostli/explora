@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    weak var delegate: LoginDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,7 +59,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 // Hooray! Let them use the app now.
                 print ("success signing up")
                 let alertController = UIAlertController(title: "Success", message: "Sign up was successful!", preferredStyle: UIAlertControllerStyle.Alert)
-                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
+                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                        self.delegate?.handleLoginSuccess(user)
+                    })
+                })
                 alertController.addAction(button)
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
@@ -68,25 +74,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(nil) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
-                if user.isNew {
-                    let message = "User signed up and logged in through Facebook!"
-                    print(message)
-                    let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                    let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                    alertController.addAction(button)
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                } else {
-                    let message = "User logged in through Facebook!"
-                    print(message)
-                    let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                    let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                    alertController.addAction(button)
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                }
-            } else {
-                let message = "Uh oh. The user cancelled the Facebook login."
+                let message = "Sign up was successful!"
                 print(message)
-                let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Facebook Signup", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let button = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) -> Void in
+                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                        self.delegate?.handleLoginSuccess(user)
+                    })
+                })
+                alertController.addAction(button)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let message = "Uh oh. There was an error signing up through Facebook."
+                print(message)
+                let alertController = UIAlertController(title: "Facebook Signup", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
                 alertController.addAction(button)
                 self.presentViewController(alertController, animated: true, completion: nil)
