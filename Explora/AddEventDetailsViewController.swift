@@ -19,26 +19,18 @@ let kDateTextTwo = 2
 let kTextThree = 3
 let kTextFour = 4
 
-let kPrefixTitle = "Title:\t"
-let kPrefixCategory = "Category:\t"
-let kPrefixStart = "Start Time:\t"
-let kPrefixEnd  = "End Time:\t"
-let kPrefixAttendees = "Attendees:\t"
-let kPrefixDescription = "Description:\t"
+let kPrefixTitle = "Title"
+let kPrefixCategory = "Category\t"
+let kPrefixStart = "Start Time\t"
+let kPrefixEnd  = "End Time\t"
+let kPrefixAttendees = "Attendees\t"
+let kPrefixDescription = "Description"
+let kDefaultCategory = "Other"
+let kDefaultAttendees = "2"
 
 
 class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
-    
-   /* @IBOutlet weak var titleText: UITextField!
-    @IBOutlet weak var categoryText: UITextField!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet var mapView: MGLMapView!
-    @IBOutlet weak var numExplorersText: UITextField!
-    @IBOutlet weak var startTimeText: UITextField!
-    @IBOutlet weak var endTimeText: UITextField!
-    @IBOutlet weak var createButton: UIButton!
-    @IBOutlet weak var explorersText: UITextField!
-    @IBOutlet weak var descriptionText: UITextView!*/
+
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MGLMapView!
@@ -66,23 +58,63 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //$$$ change to read location coords from event class var
+        //coords = event.eventCoordinate
+        coords = CLLocationCoordinate2DMake(37.8025,-122.406)
+        print("Coords = \(coords.latitude)")
+
+        
         mapView.delegate = self
+        // available styles:
+        //   streets-v8.json
+        //   emerald-v8.json
+        //   light-v8.json
+        //   dark-v8.json
+        //   satellite-v8.json
+        mapView.styleURL = NSURL(string: "asset://styles/emerald-v8.json");
+        
+        self.mapView.setCenterCoordinate(coords, zoomLevel: 15, direction: 180, animated: false)
+        let camera = MGLMapCamera(lookingAtCenterCoordinate: coords, fromDistance: 9000, pitch: 45, heading: 0)
+        mapView.setCamera(camera, withDuration: 3, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+        
+        // Declare the marker `hello` and set its coordinates, title, and subtitle
+        let hello = MGLPointAnnotation()
+        hello.coordinate = coords
+        hello.title = "Hello world!"
+        // Add marker `hello` to the map
+        mapView.addAnnotation(hello)
+        
+        
         self.startTimeText.tag = kDateTextOne
         self.endTimeText.tag = kDateTextTwo
         self.numExplorersText.tag = kTextThree
         self.categoryText.tag = kTextFour
         
+    
+        self.titleText.alpha = 0.8
+        self.startTimeText.alpha = 0.8
+        self.endTimeText.alpha = 0.8
+        self.categoryText.alpha = 0.8
+        self.numExplorersText.alpha = 0.8
+        self.createButton.alpha = 0.8
+        self.descriptionText.backgroundColor = UIColor.whiteColor()
+        self.descriptionText.alpha = 0.8
+        self.descriptionText.layer.cornerRadius = 5
+        
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
+        
         initTextFields()
+        initEvent()
         
-        
-        
-        //$$$ change to read location coords from event class var
-        coords = CLLocationCoordinate2DMake(37.8025,-122.406)
-        print("Coords = \(coords.latitude)")
-        
-        self.mapView.setCenterCoordinate(CLLocationCoordinate2D(latitude: self.coords.latitude, longitude: self.coords.longitude), zoomLevel: 15, animated: true)
+        //ADD TAP GESTURE
+
         
         //$$$ change to read the event location string from event class var
+        //self.updateLocationInLabel(event.eventAddress)
         self.updateLocationInLabel("1, Telegraph Hill, San Francisco, CA 94133")
         
         titleText.becomeFirstResponder()
@@ -90,20 +122,117 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         
     }
     
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        self.view.endEditing(true)
+        if titleText.isFirstResponder() {
+            titleText.resignFirstResponder()
+        } else {
+            descriptionText.resignFirstResponder()
+        }
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("textField text \(textField.text)")
+        if textField == titleText && textField.text == kPrefixTitle
+        {
+            // move cursor to start
+            moveCursorToStart(textField)
+        }
+        print("shouldbegin")
+        return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = (textField.text?.characters.count)! - range.length
+        print("newlength: \(newLength)")
+        if newLength > 0 // have text, so don't show the placeholder
+        {
+            // check if the only text is the placeholder and remove it if needed
+            if textField == titleText && textField.text == kPrefixTitle
+            {
+                print("clearing text")
+                textField.text = ""
+                
+            } else {
+                textField.textColor = UIColor.blackColor()
+            }
+        }
+        return true
+    }
+    
+    func moveCursorToStart(textField: UITextField)
+    {
+        let beginning = textField.beginningOfDocument
+        textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition:beginning)
+        print("beginning \(beginning)")
+        //dispatch_async(dispatch_get_main_queue(), {
+        //    let beginning = textField.beginningOfDocument
+         //   textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition: beginning)
+       // })
+    }
+    
+    
+    /*func keyboardWillShow(notification : NSNotification) {
+        if descriptionText.isFirstResponder() {
+            var rect = self.view.frame;
+            
+            rect.origin.y -= 80
+            rect.size.height += 80
+            self.view.frame = rect
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if descriptionText.isFirstResponder() {
+            var rect = self.view.frame;
+            
+            rect.origin.y += 80
+            rect.size.height -= 80
+            self.view.frame = rect
+        }
+
+    }*/
+    
     func initTextFields() {
         let currdate = NSDate()
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .LongStyle
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         let strDate = dateFormatter.stringFromDate(currdate)
         startTimeText.text = "Start Time:\t\(strDate)"
-        endTimeText.text = "End Time:\t\(strDate)"
-        //Add an hour to current date here
-        titleText.text = kPrefixTitle
-        numExplorersText.text = kPrefixAttendees + "1"
-        categoryText.text = kPrefixCategory + "None"
-        descriptionText.text = kPrefixDescription
         
+        
+        //Add an hour to current date here
+        endTimeText.text = "End Time:\t\(strDate)"
+        
+        
+        titleText.placeholder = kPrefixTitle
+        titleText.delegate = self
+        titleText.textColor = UIColor.lightGrayColor()
+
+        numExplorersText.text = kPrefixAttendees + kDefaultAttendees
+        categoryText.text = kPrefixCategory + kDefaultCategory
+        descriptionText.text = kPrefixDescription
+        descriptionText.textColor = UIColor.lightGrayColor()
+        
+        
+        
+    }
+    
+    func initEvent() {
+        //Set default values for the event
+        let currdate = NSDate()
+        newEvent.eventTitle = ""
+        newEvent.meetingStartTime = currdate
+        
+        //Add 2 hours for end Time
+        newEvent.meetingEndTime = currdate
+        newEvent.category = ExploraEventCategory.CommunityCulture.rawValue
+        newEvent.attendeesLimit = 2
+        newEvent.eventDescription = ""
+        //newEvent.creatorID = event.creatorID
+        //newEvent.eventLocation = event.eventLocation
     }
     
     @IBAction func endTimeEdit(sender: UITextField) {
@@ -126,8 +255,9 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     @IBAction func createPressed(sender: UIButton) {
         //self.event.eventLocation = geoPoint
-        let title = titleText.text
-        newEvent.eventTitle = title!.substringWithRange(Range<String.Index>(start: title!.startIndex.advancedBy(kPrefixTitle.characters.count), end: title!.endIndex.advancedBy(0)))
+        newEvent.eventTitle = titleText.text
+        
+        //newEvent.eventTitle = title!.substringWithRange(Range<String.Index>(start: title!.startIndex.advancedBy(kPrefixTitle.characters.count), end: title!.endIndex.advancedBy(0)))
         
         
         let desc = descriptionText.text
@@ -145,7 +275,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         print(".category \(newEvent.category)")
         
         
-        event = newEvent
+        /*event = newEvent
         
         event.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
@@ -156,9 +286,23 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
             } else {
                 // There was a problem, check error.description
             }
-        }
+        }*/
 
     }
+    
+  /*  func textFieldDidBeginEditing(textField: UITextField) {
+        let beginning = textField.beginningOfDocument
+        textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition: beginning)
+        textField.placeholder = nil
+        print("didbegin")
+    }*/
+    
+    /*func textFieldDidEndEditing(textField: UITextField) {
+        textField.placeholder = "Title:"
+        print("didend")
+    }*/
+    
+    
     
     func addPicker(sender: UITextField) {
         let pickerView  : UIPickerView = UIPickerView()
@@ -196,8 +340,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         print("sender \(sender.text)")
         let datePickerView  : UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
-        //datePickerView.backgroundColor = UIColor.greenColor()
-        //datePickerView.layer.borderWidth = 4
         
         let currentDate = NSDate()
         datePickerView.minimumDate = currentDate
@@ -298,7 +440,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         if (pickerView.tag == kTextThree) {
             title = explorers[row]
         } else if pickerView.tag == kTextFour {
-            categoryText.text = kPrefixCategory + "None"
+            categoryText.text = kPrefixCategory + kDefaultCategory
             let cat = ExploraEventCategories.categories[row]
             //let a = cat[ExploraEventCategory.HealthWellness]
             for(_,val) in cat {
@@ -331,7 +473,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         let textString = "\(titleString)\n\(locationString)"
         let attrText = NSMutableAttributedString(string: textString)
         
-        let largeFont = UIFont(name: "Arial", size: 14.0)!
+        let largeFont = UIFont(name: "Arial", size: 15.0)!
         let smallFont = UIFont(name: "Arial", size: 11.0)!
         
         //  Convert textString to NSString because attrText.addAttribute takes an NSRange.
@@ -346,6 +488,11 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         addressLabel.numberOfLines = 0
         addressLabel.attributedText = attrText
         addressLabel.textAlignment = .Center
+        
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
         
         
     }
