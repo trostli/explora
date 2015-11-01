@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XxD-Wc-1PZ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Add Event Details View Controller-->
+        <scene sceneID="sJN-wB-bxD">
+            <objects>
+                <viewController id="XxD-Wc-1PZ" customClass="AddEventDetailsViewController" customModule="Explora" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aRY-m4-kvc"/>
+                        <viewControllerLayoutGuide type="bottom" id="6SP-1h-9VM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DUe-GQ-tP4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzi-7x-ptZ" customClass="MGLMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNc-Tp-pVC">
+                                        <rect key="frame" x="11" y="274" width="266" height="52"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xDT-De-mPC">
+                                        <rect key="frame" x="8" y="56" width="273" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start Time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qao-aj-gTD">
+                                        <rect key="frame" x="8" y="94" width="273" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="startTimeEdit:" destination="XxD-Wc-1PZ" eventType="editingDidBegin" id="2hz-8o-A4S"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="End Time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5pi-fu-vsx">
+                                        <rect key="frame" x="8" y="132" width="273" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="endTimeEdit:" destination="XxD-Wc-1PZ" eventType="editingDidBegin" id="Dry-5M-kLT"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Explorers " borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAz-DF-HJY">
+                                        <rect key="frame" x="8" y="170" width="273" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="explorersEdit:" destination="XxD-Wc-1PZ" eventType="editingDidBegin" id="HBK-x0-pbu"/>
+                                        </connections>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Description:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pIk-hj-6nr">
+                                        <rect key="frame" x="8" y="345" width="273" height="79"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Y6-96-gAQ">
+                                        <rect key="frame" x="8" y="562" width="584" height="30"/>
+                                        <state key="normal" title="Create"/>
+                                        <connections>
+                                            <action selector="createPressed:" destination="XxD-Wc-1PZ" eventType="touchUpInside" id="B4u-mN-A3x"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8e7-zj-Glw">
+                                        <rect key="frame" x="8" y="208" width="273" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="categoriesEdit:" destination="XxD-Wc-1PZ" eventType="editingDidBegin" id="271-Fc-BGQ"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="8e7-zj-Glw" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="5gx-MJ-Xq2"/>
+                                    <constraint firstItem="LNc-Tp-pVC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8e7-zj-Glw" secondAttribute="bottom" constant="36" id="6hT-NH-3L9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qao-aj-gTD" secondAttribute="trailing" constant="8" id="EUz-SX-vTf"/>
+                                    <constraint firstAttribute="trailing" secondItem="BAz-DF-HJY" secondAttribute="trailing" constant="8" id="FSl-oW-Cp3"/>
+                                    <constraint firstAttribute="trailing" secondItem="5pi-fu-vsx" secondAttribute="trailing" constant="8" id="G7p-b5-o7Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="xDT-De-mPC" secondAttribute="trailing" constant="8" id="KKH-O7-cyR"/>
+                                    <constraint firstItem="Qao-aj-gTD" firstAttribute="top" secondItem="xDT-De-mPC" secondAttribute="bottom" constant="8" id="MV5-ZK-HsM"/>
+                                    <constraint firstItem="Qao-aj-gTD" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="PGL-hk-3hh"/>
+                                    <constraint firstItem="7Y6-96-gAQ" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="RgI-GA-Dt2"/>
+                                    <constraint firstItem="5pi-fu-vsx" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="Thx-H4-pHI"/>
+                                    <constraint firstAttribute="trailing" secondItem="pIk-hj-6nr" secondAttribute="trailing" constant="8" id="UA2-aS-RaP"/>
+                                    <constraint firstItem="5pi-fu-vsx" firstAttribute="top" secondItem="Qao-aj-gTD" secondAttribute="bottom" constant="8" id="iZI-SM-g9G"/>
+                                    <constraint firstItem="pIk-hj-6nr" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="lEs-oy-kpV"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Y6-96-gAQ" secondAttribute="trailing" constant="8" id="myc-5Y-RU4"/>
+                                    <constraint firstItem="8e7-zj-Glw" firstAttribute="top" secondItem="BAz-DF-HJY" secondAttribute="bottom" constant="8" id="o76-5q-vRm"/>
+                                    <constraint firstItem="xDT-De-mPC" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="rap-Za-c07"/>
+                                    <constraint firstItem="BAz-DF-HJY" firstAttribute="leading" secondItem="Kzi-7x-ptZ" secondAttribute="leading" constant="8" id="sLB-pz-0B7"/>
+                                    <constraint firstAttribute="trailing" secondItem="8e7-zj-Glw" secondAttribute="trailing" constant="8" id="tIO-aL-i48"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Y6-96-gAQ" secondAttribute="bottom" constant="8" id="wIP-Pv-cl4"/>
+                                    <constraint firstItem="BAz-DF-HJY" firstAttribute="top" secondItem="5pi-fu-vsx" secondAttribute="bottom" constant="8" id="z9a-lm-wt4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6SP-1h-9VM" firstAttribute="top" secondItem="Kzi-7x-ptZ" secondAttribute="bottom" id="ESm-cB-0VZ"/>
+                            <constraint firstItem="Kzi-7x-ptZ" firstAttribute="top" secondItem="DUe-GQ-tP4" secondAttribute="top" id="NaX-Q2-lYf"/>
+                            <constraint firstItem="Kzi-7x-ptZ" firstAttribute="leading" secondItem="DUe-GQ-tP4" secondAttribute="leading" id="aWg-A9-XkW"/>
+                            <constraint firstAttribute="trailing" secondItem="Kzi-7x-ptZ" secondAttribute="trailing" id="wyX-bN-raD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="LNc-Tp-pVC" id="dqK-c6-6DO"/>
+                        <outlet property="categoryText" destination="8e7-zj-Glw" id="hSP-Pn-gdA"/>
+                        <outlet property="createButton" destination="7Y6-96-gAQ" id="AQI-m5-7jb"/>
+                        <outlet property="descriptionText" destination="pIk-hj-6nr" id="7MB-w0-LyF"/>
+                        <outlet property="endTimeText" destination="5pi-fu-vsx" id="Vg5-Nm-ISZ"/>
+                        <outlet property="mapView" destination="Kzi-7x-ptZ" id="GCA-ev-hPm"/>
+                        <outlet property="numExplorersText" destination="BAz-DF-HJY" id="vpD-jP-dsV"/>
+                        <outlet property="startTimeText" destination="Qao-aj-gTD" id="PXK-yA-maN"/>
+                        <outlet property="titleText" destination="xDT-De-mPC" id="hPB-Ki-5iZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDm-jR-1NA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="243" y="58"/>
+        </scene>
+    </scenes>
+</document>
