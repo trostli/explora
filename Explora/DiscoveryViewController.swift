@@ -10,7 +10,7 @@ import UIKit
 import Mapbox
 import Parse
 
-class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
+class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelegate {
 
     weak var mapView: ExploraMapView!
 
@@ -74,9 +74,25 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
     
     @IBAction func onSetLocationTap(sender: UIButton) {
-        self.performSegueWithIdentifier("addEventDetailsSegue", sender: self)
+        if PFUser.currentUser() != nil {
+            self.performSegueWithIdentifier("addEventDetailsSegue", sender: self)
+        } else {
+            let storyboard = UIStoryboard(name: "LoginFlow", bundle: nil)
+            if let loginNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
+                if let loginVc = loginNavVC.topViewController as? LoginViewController {
+                    loginVc.delegate = self;
+                }
+                self.presentViewController(loginNavVC, animated: true, completion: nil)
+            }
+        }
+
     }
     
+    func handleLoginSuccess(user: PFUser) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
     func transitionToCreateEventMode() {
         inSetLocationMode = true
         
@@ -246,7 +262,9 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
             if _newEventAddressString != nil {
                 newEvent.eventAddress = _newEventAddressString!
             }
-            
+
+            // TODO: Needs to be updated so that event takes an actual user object
+            newEvent.creatorID = PFUser.currentUser()?.objectId
             newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
             
             let vc = segue.destinationViewController as! AddEventDetailsViewController
