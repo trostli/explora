@@ -20,10 +20,9 @@ let kTextThree = 3
 let kTextFour = 4
 
 let kPrefixTitle = "Title"
-let kPrefixCategory = "Category\t"
-let kPrefixStart = "Start Time\t"
-let kPrefixEnd  = "End Time\t"
-let kPrefixAttendees = "Attendees\t"
+
+
+
 let kPrefixDescription = "Description"
 let kDefaultCategory = "Other"
 let kDefaultAttendees = "2"
@@ -32,13 +31,14 @@ let kDefaultAttendees = "2"
 class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
 
     
-    @IBOutlet weak var addressLabel: UILabel!
+    
     @IBOutlet weak var mapView: MGLMapView!
     
     @IBOutlet weak var titleText: UITextField!
     
     @IBOutlet weak var startTimeText: UITextField!
     
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var endTimeText: UITextField!
     
     @IBOutlet weak var numExplorersText: UITextField!
@@ -47,7 +47,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     @IBOutlet weak var descriptionText: UITextView!
     
-    @IBOutlet weak var createButton: UIButton!
     
     var coords : CLLocationCoordinate2D!
     
@@ -59,9 +58,8 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         super.viewDidLoad()
         
         //$$$ change to read location coords from event class var
-        coords = event.eventCoordinate
-
-
+        coords = CLLocationCoordinate2DMake(37.8025,-122.406)
+        //coords = event.eventCoordinate
         
         mapView.delegate = self
         // available styles:
@@ -89,21 +87,10 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         self.numExplorersText.tag = kTextThree
         self.categoryText.tag = kTextFour
         
-    
-        self.titleText.alpha = 0.8
-        self.startTimeText.alpha = 0.8
-        self.endTimeText.alpha = 0.8
-        self.categoryText.alpha = 0.8
-        self.numExplorersText.alpha = 0.8
-        self.createButton.alpha = 0.8
-        self.descriptionText.backgroundColor = UIColor.whiteColor()
-        self.descriptionText.alpha = 0.8
+        
         self.descriptionText.layer.cornerRadius = 5
-        
-        
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
-        
+        self.descriptionText.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.descriptionText.layer.borderWidth = 0.3
         
         initTextFields()
         
@@ -111,10 +98,11 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
 
         
         //$$$ change to read the event location string from event class var
-        self.updateLocationInLabel(event.eventAddress!)
+        self.updateLocationInLabel("1, Telegraph Hill, San Francisco, CA")
+        //self.updateLocationInLabel(event.eventAddress!)
         
         titleText.becomeFirstResponder()
-        createButton.backgroundColor = UIColor.orangeColor()
+        
         
     }
     
@@ -192,21 +180,21 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         dateFormatter.dateStyle = .LongStyle
         dateFormatter.timeStyle = .ShortStyle
         let strDate = dateFormatter.stringFromDate(currdate)
-        startTimeText.text = "Start Time:\t\(strDate)"
+        startTimeText.text = "\(strDate)"
+        event.meetingStartTime = currdate
         
         
         //Add an hour to current date here
-        endTimeText.text = "End Time:\t\(strDate)"
-        
+        endTimeText.text = "\(strDate)"
+        event.meetingEndTime = currdate
         
         titleText.placeholder = kPrefixTitle
         titleText.delegate = self
         titleText.textColor = UIColor.lightGrayColor()
-
+        
+        startTimeText.borderStyle = UITextBorderStyle.RoundedRect
         numExplorersText.text = kDefaultAttendees
-        categoryText.text = kPrefixCategory + kDefaultCategory
-        descriptionText.text = kPrefixDescription
-        descriptionText.textColor = UIColor.lightGrayColor()
+        categoryText.text = kDefaultCategory
         
         
         
@@ -230,31 +218,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     }
     
     
-    @IBAction func createPressed(sender: UIButton) {
-        event.eventTitle = titleText.text
-        
-        //newEvent.eventTitle = title!.substringWithRange(Range<String.Index>(start: title!.startIndex.advancedBy(kPrefixTitle.characters.count), end: title!.endIndex.advancedBy(0)))
-        
-        let attendeesLimit:Int? = Int(numExplorersText.text!)
-        print("attendees limit: \(attendeesLimit)")
-        event.attendeesLimit = attendeesLimit
-        
-        let description = descriptionText.text
-        
-        event.eventDescription = description!.substringWithRange(Range<String.Index>(start: description!.startIndex.advancedBy(kPrefixDescription.characters.count), end: description!.endIndex.advancedBy(0)))
-        
-        event.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                print("The object has been saved.")
-                self.dismissViewControllerAnimated(true, completion: nil)
-                
-            } else {
-                print("Error : \(error!.description)")
-            }
-        }
-
-    }
     
   /*  func textFieldDidBeginEditing(textField: UITextField) {
         let beginning = textField.beginningOfDocument
@@ -346,10 +309,10 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         //dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
         let strDate = dateFormatter.stringFromDate(sender.date)
         if sender.tag == kPickerOne {
-            self.startTimeText.text = kPrefixStart + strDate
+            self.startTimeText.text = strDate
             event.meetingStartTime = (sender.date)
         } else if sender.tag == kPickerTwo {
-            self.endTimeText.text = kPrefixEnd + strDate
+            self.endTimeText.text = strDate
             event.meetingEndTime = (sender.date)
         }
         
@@ -365,6 +328,10 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     }
     
     func cancelPressed() {
+        
+    }
+    
+    @IBAction func cancelEvent(sender: UIBarButtonItem) {
         
     }
     
@@ -404,7 +371,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         if (pickerView.tag == kTextThree) {
             title = explorers[row]
         } else if pickerView.tag == kTextFour {
-            categoryText.text = kPrefixCategory + kDefaultCategory
+            categoryText.text = kDefaultCategory
             let cat = ExploraEventCategories.categories[row]
             //let a = cat[ExploraEventCategory.HealthWellness]
             for(_,val) in cat {
@@ -422,7 +389,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         } else if pickerView.tag == kTextFour {
             let cat = ExploraEventCategories.categories[row]
             for(_,val) in cat {
-                categoryText.text = kPrefixCategory + val
+                categoryText.text = val
                 event.category = row
             }
         }
@@ -454,6 +421,33 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         addressLabel.textAlignment = .Center
         
         
+    }
+    
+    @IBAction func createButtonPressed(sender: UIBarButtonItem) {
+        event.eventTitle = titleText.text
+        
+        //newEvent.eventTitle = title!.substringWithRange(Range<String.Index>(start: title!.startIndex.advancedBy(kPrefixTitle.characters.count), end: title!.endIndex.advancedBy(0)))
+        
+        let attendeesLimit:Int? = Int(numExplorersText.text!)
+        print("attendees limit: \(attendeesLimit)")
+        event.attendeesLimit = attendeesLimit
+        
+        let description = descriptionText.text
+        
+        //event.eventDescription = description!.substringWithRange(Range<String.Index>(start: description!.startIndex.advancedBy(kPrefixDescription.characters.count), end: description!.endIndex.advancedBy(0)))
+        
+        event.eventDescription = description
+        event.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                print("The object has been saved.")
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            } else {
+                print("Error : \(error!.description)")
+            }
+        }
+
     }
     
     override func viewWillDisappear(animated: Bool) {
