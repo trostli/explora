@@ -54,15 +54,13 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     //Move this to ExploraEvent model
     private var explorers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     var event = ExploraEvent()
-    private var newEvent = ExploraEvent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //$$$ change to read location coords from event class var
-        //coords = event.eventCoordinate
-        coords = CLLocationCoordinate2DMake(37.8025,-122.406)
-        print("Coords = \(coords.latitude)")
+        coords = event.eventCoordinate
+
 
         
         mapView.delegate = self
@@ -108,14 +106,12 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         
         
         initTextFields()
-        initEvent()
         
         //ADD TAP GESTURE
 
         
         //$$$ change to read the event location string from event class var
-        //self.updateLocationInLabel(event.eventAddress)
-        self.updateLocationInLabel("1, Telegraph Hill, San Francisco, CA 94133")
+        self.updateLocationInLabel(event.eventAddress!)
         
         titleText.becomeFirstResponder()
         createButton.backgroundColor = UIColor.orangeColor()
@@ -133,19 +129,16 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        print("textField text \(textField.text)")
         if textField == titleText && textField.text == kPrefixTitle
         {
             // move cursor to start
             moveCursorToStart(textField)
         }
-        print("shouldbegin")
         return true
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = (textField.text?.characters.count)! - range.length
-        print("newlength: \(newLength)")
         if newLength > 0 // have text, so don't show the placeholder
         {
             // check if the only text is the placeholder and remove it if needed
@@ -165,7 +158,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     {
         let beginning = textField.beginningOfDocument
         textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition:beginning)
-        print("beginning \(beginning)")
         //dispatch_async(dispatch_get_main_queue(), {
         //    let beginning = textField.beginningOfDocument
          //   textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition: beginning)
@@ -211,28 +203,13 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         titleText.delegate = self
         titleText.textColor = UIColor.lightGrayColor()
 
-        numExplorersText.text = kPrefixAttendees + kDefaultAttendees
+        numExplorersText.text = kDefaultAttendees
         categoryText.text = kPrefixCategory + kDefaultCategory
         descriptionText.text = kPrefixDescription
         descriptionText.textColor = UIColor.lightGrayColor()
         
         
         
-    }
-    
-    func initEvent() {
-        //Set default values for the event
-        let currdate = NSDate()
-        newEvent.eventTitle = ""
-        newEvent.meetingStartTime = currdate
-        
-        //Add 2 hours for end Time
-        newEvent.meetingEndTime = currdate
-        newEvent.category = ExploraEventCategory.CommunityCulture.rawValue
-        newEvent.attendeesLimit = 2
-        newEvent.eventDescription = ""
-        //newEvent.creatorID = event.creatorID
-        //newEvent.eventLocation = event.eventLocation
     }
     
     @IBAction func endTimeEdit(sender: UITextField) {
@@ -254,39 +231,28 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     
     @IBAction func createPressed(sender: UIButton) {
-        //self.event.eventLocation = geoPoint
-        newEvent.eventTitle = titleText.text
+        event.eventTitle = titleText.text
         
         //newEvent.eventTitle = title!.substringWithRange(Range<String.Index>(start: title!.startIndex.advancedBy(kPrefixTitle.characters.count), end: title!.endIndex.advancedBy(0)))
         
+        let attendeesLimit:Int? = Int(numExplorersText.text!)
+        print("attendees limit: \(attendeesLimit)")
+        event.attendeesLimit = attendeesLimit
         
-        let desc = descriptionText.text
-        newEvent.eventDescription = desc!.substringWithRange(Range<String.Index>(start: desc!.startIndex.advancedBy(kPrefixDescription.characters.count), end: desc!.endIndex.advancedBy(0)))
+        let description = descriptionText.text
         
-        //Set the creator ID & event location from passed in event Object
-        //newEvent.creatorID = event.creatorID
-        //newEvent.eventLocation = event.eventLocation
-        
-        print(".eventTitle \(newEvent.eventTitle)")
-        print(".eventDescription \(newEvent.eventDescription)")
-        print(".attendees \(newEvent.attendeesLimit)")
-        print(".startTime \(newEvent.meetingStartTime)")
-        print(".endTime \(newEvent.meetingEndTime)")
-        print(".category \(newEvent.category)")
-        
-        
-        /*event = newEvent
+        event.eventDescription = description!.substringWithRange(Range<String.Index>(start: description!.startIndex.advancedBy(kPrefixDescription.characters.count), end: description!.endIndex.advancedBy(0)))
         
         event.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("The object has been saved.")
-                //self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
                 
             } else {
-                // There was a problem, check error.description
+                print("Error : \(error!.description)")
             }
-        }*/
+        }
 
     }
     
@@ -337,7 +303,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     
     func addDatePicker(sender: UITextField) {
-        print("sender \(sender.text)")
         let datePickerView  : UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
         
@@ -380,13 +345,12 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         dateFormatter.timeStyle = .MediumStyle
         //dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
         let strDate = dateFormatter.stringFromDate(sender.date)
-        print(strDate)
         if sender.tag == kPickerOne {
             self.startTimeText.text = kPrefixStart + strDate
-            newEvent.meetingStartTime = (sender.date)
+            event.meetingStartTime = (sender.date)
         } else if sender.tag == kPickerTwo {
             self.endTimeText.text = kPrefixEnd + strDate
-            newEvent.meetingEndTime = (sender.date)
+            event.meetingEndTime = (sender.date)
         }
         
     }
@@ -453,13 +417,13 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if pickerView.tag == kTextThree {
-            numExplorersText.text = kPrefixAttendees + explorers[row]
-            newEvent.attendeesLimit = row
+            numExplorersText.text = explorers[row]
+            event.attendeesLimit = row
         } else if pickerView.tag == kTextFour {
             let cat = ExploraEventCategories.categories[row]
             for(_,val) in cat {
                 categoryText.text = kPrefixCategory + val
-                newEvent.category = row
+                event.category = row
             }
         }
         
