@@ -74,15 +74,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     }
     
     @IBAction func onSetLocationTap(sender: UIButton) {
-        let newEvent = ExploraEvent()
-        if _newEventAddressString != nil {
-            newEvent.eventAddress = _newEventAddressString!
-        }
-        
-        newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-
-        // Perform segue to create event details VC here and pass newEvent
-        print("Perform segue to Create Event Details VC ")
+        self.performSegueWithIdentifier("addEventDetailsSegue", sender: self)
     }
     
     func transitionToCreateEventMode() {
@@ -188,10 +180,12 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
             let coordinates = CLLocationCoordinate2DMake(lastKnownLocation!.latitude, lastKnownLocation!.longitude)
             self.mapView.setCenterCoordinate(coordinates, zoomLevel: 12.0, animated: true)
             self.getEvents(lastKnownLocation!)
+            PFUser.currentUser()?.updateLocation()
         } else {
         PFGeoPoint.geoPointForCurrentLocationInBackground({ (geopoint: PFGeoPoint?, error: NSError?) -> Void in
                 let coordinates = CLLocationCoordinate2DMake(geopoint!.latitude, geopoint!.longitude)
                 self.mapView.setCenterCoordinate(coordinates, zoomLevel: 12.0, animated: true)
+                self.getAddressStringFromCoords(coordinates)
                 self.getEvents(geopoint!)
             })
         }
@@ -243,9 +237,21 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let annotation = sender as! ExploraPointAnnotation
-        let vc = segue.destinationViewController as! EventDetailViewController
-        vc.event = annotation.event
+        if segue.identifier == "detailSegue" {
+            let annotation = sender as! ExploraPointAnnotation
+            let vc = segue.destinationViewController as! EventDetailViewController
+            vc.event = annotation.event
+        } else if segue.identifier == "addEventDetailsSegue" {
+            let newEvent = ExploraEvent()
+            if _newEventAddressString != nil {
+                newEvent.eventAddress = _newEventAddressString!
+            }
+            
+            newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+            
+            let vc = segue.destinationViewController as! AddEventDetailsViewController
+            vc.event = newEvent
+        }
     }
 
 
