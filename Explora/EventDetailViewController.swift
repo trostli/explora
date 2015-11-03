@@ -14,16 +14,18 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
 
     var event: ExploraEvent!
     weak var mapView: ExploraMapView!
-    
+
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventMeetingTimeLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var mapViewContainerView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        //print("atendees count:\(event.attendees.)")
+
         eventTitleLabel.text = event.eventTitle
         eventDescriptionLabel.text = event.eventDescription
         eventAddressLabel.text = event.eventAddress
@@ -31,12 +33,12 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         let formatter = NSDateFormatter() //Should be cached somewhere since this is expensive
         formatter.dateStyle = NSDateFormatterStyle.LongStyle
         formatter.timeStyle = .ShortStyle
-        
+
         if event.meetingStartTime != nil {
             let meetingStartTimeString = formatter.stringFromDate(event.meetingStartTime!)
             eventMeetingTimeLabel.text = meetingStartTimeString
         }
-        
+
         // initialize the map view
         let styleURL = NSURL(string: "asset://styles/emerald-v8.json")
         mapView = ExploraMapView(frame: mapViewContainerView.bounds, styleURL: styleURL)
@@ -52,7 +54,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     @IBAction func onJoinTap(sender: UIButton) {
         if PFUser.currentUser() != nil {
@@ -69,12 +71,12 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
     }
 
     // MARK: - Login delegate
-    
+
     func handleLoginSuccess(user: PFUser) {
         print(user)
         joinEvent(user)
     }
-    
+
     func joinEvent(user: PFUser) {
         let attendeesRelation = self.event.attendees
         attendeesRelation?.addObject(user)
@@ -86,7 +88,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
             }
         }
     }
-    
+
     func handleSuccessfulJoin() {
         let alertController = UIAlertController(title: "Success", message: "Thanks for joining the event! Have fun!", preferredStyle: UIAlertControllerStyle.Alert)
         let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
@@ -95,27 +97,27 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         alertController.addAction(button)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-    
+
     func handleErrorJoin() {
         let alertController = UIAlertController(title: "Error", message: "Sorry, there was an error in joining the event, please try again.", preferredStyle: UIAlertControllerStyle.Alert)
         let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alertController.addAction(button)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-    
+
     // MARK: - Mapbox delegate
 
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("people")
-        
+
         if annotationImage == nil {
             let image = UIImage(named: "people")
             annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: "people")
         }
-        
+
         return annotationImage
     }
-    
+
     /*
     // MARK: - Navigation
 

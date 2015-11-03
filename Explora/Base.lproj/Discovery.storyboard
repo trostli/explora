@@ -40,30 +40,18 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yzl-gz-M2X">
-                                <rect key="frame" x="275" y="250" width="150" height="50"/>
+                                <rect key="frame" x="213" y="250" width="175" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map-pin" translatesAutoresizingMaskIntoConstraints="NO" id="5kD-td-EzW">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="3oc-QU-htG"/>
-                                            <constraint firstAttribute="width" constant="48" id="4Pi-kj-eYn"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="3oc-QU-htG"/>
-                                            </mask>
-                                        </variation>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhi-QW-KUw">
-                                        <rect key="frame" x="48" y="0.0" width="102" height="50"/>
-                                        <state key="normal" title="Set Location"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhi-QW-KUw">
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="50"/>
+                                        <state key="normal" title="Set Location" image="set_location"/>
                                         <connections>
                                             <action selector="onSetLocationTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PKJ-ol-kn6"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="6gy-EB-DIL"/>
+                                    <constraint firstAttribute="width" constant="175" id="6gy-EB-DIL"/>
                                     <constraint firstAttribute="height" constant="50" id="e84-nZ-vAU"/>
                                 </constraints>
                             </stackView>
@@ -74,6 +62,9 @@
                                     <constraint firstAttribute="width" constant="60" id="hT5-fG-Z7M"/>
                                 </constraints>
                                 <state key="normal" image="list-icon"/>
+                                <connections>
+                                    <segue destination="npP-n1-fr0" kind="show" id="FSK-L0-Lso"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="123 Townsend St" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krk-P0-ZRE">
                                 <rect key="frame" x="175" y="25" width="250" height="59"/>
@@ -93,7 +84,7 @@
                             <constraint firstItem="s2Y-Sb-pkf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9P4-ar-iPs"/>
                             <constraint firstItem="Yzl-gz-M2X" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="256" id="Fml-5C-6eS"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xl3-he-wh8" secondAttribute="bottom" constant="25" id="LeU-Rg-Xir"/>
-                            <constraint firstItem="Yzl-gz-M2X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="50" id="T4g-ow-Ifw"/>
+                            <constraint firstItem="Yzl-gz-M2X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T4g-ow-Ifw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yo6-zg-2rY" secondAttribute="trailing" id="YI0-WS-6ZJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xl3-he-wh8" secondAttribute="bottom" constant="8" id="bQV-aD-XQ3"/>
                             <constraint firstItem="s2Y-Sb-pkf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="25" id="dSl-3j-Egb"/>
@@ -124,8 +115,8 @@
                         <outlet property="eventLocationTextView" destination="krk-P0-ZRE" id="RZK-3o-aDy"/>
                         <outlet property="listEventsButton" destination="s2Y-Sb-pkf" id="ViR-d1-IyA"/>
                         <outlet property="setLocationStackView" destination="Yzl-gz-M2X" id="x5y-xl-jsy"/>
-                        <segue destination="iAC-yU-Nkj" kind="presentation" identifier="detailSegue" modalTransitionStyle="partialCurl" id="age-Qa-w7I"/>
                         <segue destination="RTn-Nc-XnD" kind="show" identifier="addEventDetailsSegue" id="nuF-BU-XeK"/>
+                        <segue destination="EpO-Eo-QOq" kind="presentation" identifier="detailSegue" modalTransitionStyle="partialCurl" id="4up-eP-tl9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -138,101 +129,29 @@
                 <viewControllerPlaceholder storyboardName="AddEventDetails" id="RTn-Nc-XnD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzS-gy-6Ey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="619" y="727"/>
+            <point key="canvasLocation" x="1009.5" y="359"/>
         </scene>
-        <!--Event Detail View Controller-->
-        <scene sceneID="2ul-pm-X41">
+        <!--Profile-->
+        <scene sceneID="zaf-0i-CbI">
             <objects>
-                <viewController id="iAC-yU-Nkj" customClass="EventDetailViewController" customModule="Explora" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dpq-PL-7y3"/>
-                        <viewControllerLayoutGuide type="bottom" id="clU-dM-7vg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wEV-3d-cxH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore Coit Tower!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0B-Mn-FSV">
-                                <rect key="frame" x="20" y="278" width="148" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1pm, November 1, 2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Em-6h-RI2">
-                                <rect key="frame" x="20" y="307" width="151" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDT-fP-8Tj">
-                                <rect key="frame" x="0.0" y="545" width="600" height="55"/>
-                                <color key="backgroundColor" red="1" green="0.64705882349999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="XOq-dJ-xxB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                <state key="normal" title="Join Event"/>
-                                <connections>
-                                    <action selector="onJoinTap:" destination="iAC-yU-Nkj" eventType="touchUpInside" id="dze-mz-9ME"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Come join me in a scenic hike to the top of Coit Tower! We will check out place ins North Beach afterwards." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-tm-JZh">
-                                <rect key="frame" x="20" y="374" width="532" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Telegraph Hill Blvd, San Francisco, CA 94109" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-8G-a3l">
-                                <rect key="frame" x="20" y="332" width="301" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNo-XV-oyn">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="270" id="3qc-bB-xmt"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="o0B-Mn-FSV" firstAttribute="leading" secondItem="wEV-3d-cxH" secondAttribute="leading" constant="20" id="1x4-iF-udK"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ahY-8G-a3l" secondAttribute="trailing" constant="20" id="7Al-jh-eCA"/>
-                            <constraint firstItem="IDT-fP-8Tj" firstAttribute="leading" secondItem="wEV-3d-cxH" secondAttribute="leading" id="BSx-54-LPd"/>
-                            <constraint firstItem="4dz-tm-JZh" firstAttribute="top" secondItem="ahY-8G-a3l" secondAttribute="bottom" constant="25" id="Bwf-U0-MUi"/>
-                            <constraint firstItem="ahY-8G-a3l" firstAttribute="top" secondItem="4Em-6h-RI2" secondAttribute="bottom" constant="8" id="J0l-a6-6rI"/>
-                            <constraint firstItem="4dz-tm-JZh" firstAttribute="leading" secondItem="ahY-8G-a3l" secondAttribute="leading" id="Ms5-Zf-FMW"/>
-                            <constraint firstItem="ahY-8G-a3l" firstAttribute="leading" secondItem="4Em-6h-RI2" secondAttribute="leading" id="Y4E-fA-0uw"/>
-                            <constraint firstItem="4Em-6h-RI2" firstAttribute="leading" secondItem="o0B-Mn-FSV" secondAttribute="leading" id="bgg-P7-94d"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4dz-tm-JZh" secondAttribute="trailing" constant="20" id="cDI-S9-yzV"/>
-                            <constraint firstAttribute="trailing" secondItem="IDT-fP-8Tj" secondAttribute="trailing" id="iO6-Lm-7H1"/>
-                            <constraint firstItem="NNo-XV-oyn" firstAttribute="top" secondItem="wEV-3d-cxH" secondAttribute="top" id="mVe-wH-Y0w"/>
-                            <constraint firstItem="4Em-6h-RI2" firstAttribute="top" secondItem="o0B-Mn-FSV" secondAttribute="bottom" constant="8" id="qlZ-uN-CLM"/>
-                            <constraint firstAttribute="trailing" secondItem="NNo-XV-oyn" secondAttribute="trailing" id="ulB-IG-uIq"/>
-                            <constraint firstItem="NNo-XV-oyn" firstAttribute="leading" secondItem="wEV-3d-cxH" secondAttribute="leading" id="xS7-lJ-xJS"/>
-                            <constraint firstItem="clU-dM-7vg" firstAttribute="top" secondItem="IDT-fP-8Tj" secondAttribute="bottom" id="xnx-bv-S1p"/>
-                            <constraint firstItem="o0B-Mn-FSV" firstAttribute="top" secondItem="NNo-XV-oyn" secondAttribute="bottom" constant="8" id="xui-ln-K6l"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="eventAddressLabel" destination="ahY-8G-a3l" id="afw-FA-Vks"/>
-                        <outlet property="eventDescriptionLabel" destination="4dz-tm-JZh" id="Q42-0X-Fwi"/>
-                        <outlet property="eventMeetingTimeLabel" destination="4Em-6h-RI2" id="HbI-LE-Obw"/>
-                        <outlet property="eventTitleLabel" destination="o0B-Mn-FSV" id="wDg-jQ-39M"/>
-                        <outlet property="mapViewContainerView" destination="NNo-XV-oyn" id="64j-MT-BfL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yPR-Sa-o7d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Profile" id="npP-n1-fr0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ex8-Ry-Ik9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184" y="253"/>
+            <point key="canvasLocation" x="979" y="189"/>
+        </scene>
+        <!--EventDetail-->
+        <scene sceneID="eum-Ab-alU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EventDetail" id="EpO-Eo-QOq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDg-cQ-BO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="994" y="277"/>
         </scene>
     </scenes>
     <resources>
         <image name="crosshair" width="64" height="64"/>
         <image name="list-icon" width="64" height="64"/>
-        <image name="map-pin" width="48" height="48"/>
         <image name="plus" width="64" height="64"/>
+        <image name="set_location" width="181" height="47"/>
     </resources>
 </document>
