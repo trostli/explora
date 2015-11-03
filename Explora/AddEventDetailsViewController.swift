@@ -31,6 +31,7 @@ let kDefaultAttendees = "2"
 class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
 
     
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var mapView: MGLMapView!
     
@@ -47,9 +48,11 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     
     @IBOutlet weak var descriptionText: UITextView!
     
+    @IBOutlet weak var createButton: UIBarButtonItem!
     
-    var coords : CLLocationCoordinate2D!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    private var coords : CLLocationCoordinate2D!
     //Move this to ExploraEvent model
     private var explorers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     var event = ExploraEvent()
@@ -58,8 +61,8 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         super.viewDidLoad()
         
         //$$$ change to read location coords from event class var
-        coords = CLLocationCoordinate2DMake(37.8025,-122.406)
-        //coords = event.eventCoordinate
+        //coords = CLLocationCoordinate2DMake(37.8025,-122.406)
+        coords = event.eventCoordinate
         
         mapView.delegate = self
         // available styles:
@@ -92,14 +95,23 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         self.descriptionText.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.descriptionText.layer.borderWidth = 0.3
         
+        if let font = UIFont(name: "Arial", size: 15) {
+            createButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+            cancelButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+            
+        }
+        
+        
         initTextFields()
         
         //ADD TAP GESTURE
-
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(tapRecognizer)
         
         //$$$ change to read the event location string from event class var
-        self.updateLocationInLabel("1, Telegraph Hill, San Francisco, CA")
-        //self.updateLocationInLabel(event.eventAddress!)
+        //self.updateLocationInLabel("1, Telegraph Hill, San Francisco, CA")
+        self.updateLocationInLabel(event.eventAddress!)
         
         titleText.becomeFirstResponder()
         
@@ -116,14 +128,18 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         }
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func handleSingleTap(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    /*func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == titleText && textField.text == kPrefixTitle
         {
             // move cursor to start
             moveCursorToStart(textField)
         }
         return true
-    }
+    }*/
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = (textField.text?.characters.count)! - range.length
@@ -132,7 +148,6 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
             // check if the only text is the placeholder and remove it if needed
             if textField == titleText && textField.text == kPrefixTitle
             {
-                print("clearing text")
                 textField.text = ""
                 
             } else {
@@ -142,7 +157,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         return true
     }
     
-    func moveCursorToStart(textField: UITextField)
+    /*func moveCursorToStart(textField: UITextField)
     {
         let beginning = textField.beginningOfDocument
         textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition:beginning)
@@ -150,29 +165,8 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         //    let beginning = textField.beginningOfDocument
          //   textField.selectedTextRange = textField.textRangeFromPosition(beginning, toPosition: beginning)
        // })
-    }
-    
-    
-    /*func keyboardWillShow(notification : NSNotification) {
-        if descriptionText.isFirstResponder() {
-            var rect = self.view.frame;
-            
-            rect.origin.y -= 80
-            rect.size.height += 80
-            self.view.frame = rect
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if descriptionText.isFirstResponder() {
-            var rect = self.view.frame;
-            
-            rect.origin.y += 80
-            rect.size.height -= 80
-            self.view.frame = rect
-        }
-
     }*/
+    
     
     func initTextFields() {
         let currdate = NSDate()
@@ -237,16 +231,24 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         let pickerView  : UIPickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
+        pickerView.backgroundColor = UIColor.clearColor()
+        
         
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.Default
+        toolBar.barStyle = UIBarStyle.BlackTranslucent
         toolBar.translucent = true
         //toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
         toolBar.sizeToFit()
         
+        
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("pickerDonePressed:"))
+        
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed"))
+        if let font = UIFont(name: "Arial", size: 15) {
+            doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+            cancelButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
         toolBar.setItems([cancelButton, flexibleSpace, doneButton], animated: false)
         toolBar.userInteractionEnabled = true
         
@@ -274,14 +276,19 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
         
         
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.Default
+        toolBar.barStyle = UIBarStyle.BlackTranslucent
         toolBar.translucent = true
+        
         //toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("donePressed:"))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed"))
+        if let font = UIFont(name: "Arial", size: 15) {
+            doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+            cancelButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
         toolBar.setItems([cancelButton, flexibleSpace, doneButton], animated: false)
         
         
@@ -332,7 +339,7 @@ class AddEventDetailsViewController: UIViewController, MGLMapViewDelegate, UITex
     }
     
     @IBAction func cancelEvent(sender: UIBarButtonItem) {
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func pickerDonePressed (sender: UIBarButtonItem) {
