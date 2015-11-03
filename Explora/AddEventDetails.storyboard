@@ -65,8 +65,13 @@
                                     <action selector="endTimeEdit:" destination="XxD-Wc-1PZ" eventType="editingDidBegin" id="Dry-5M-kLT"/>
                                 </connections>
                             </textField>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-aV-PVb">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-aV-PVb">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="barTintColor" red="1" green="0.64188989704608801" blue="0.35228745772281556" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Event Details" id="yqf-2z-2X7">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="5tj-Vn-XlW">
@@ -82,6 +87,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pIk-hj-6nr">
+                                <rect key="frame" x="94" y="249" width="211" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkw-7t-I7m">
                                 <rect key="frame" x="56" y="60" width="30" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -106,7 +116,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqe-gp-zOK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqe-gp-zOK">
                                 <rect key="frame" x="10" y="249" width="79" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -118,17 +128,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scK-su-xv5">
-                                <rect key="frame" x="6" y="336" width="295" height="49"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scK-su-xv5">
+                                <rect key="frame" x="10" y="339" width="307" height="63"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pIk-hj-6nr">
-                                <rect key="frame" x="94" y="249" width="211" height="79"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -142,10 +147,13 @@
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="scK-su-xv5" id="F6v-dS-Rx4"/>
+                        <outlet property="cancelButton" destination="5tj-Vn-XlW" id="qQ7-Fq-FUz"/>
                         <outlet property="categoryText" destination="8e7-zj-Glw" id="hSP-Pn-gdA"/>
+                        <outlet property="createButton" destination="obh-qG-tfE" id="KjN-gP-T5j"/>
                         <outlet property="descriptionText" destination="pIk-hj-6nr" id="7MB-w0-LyF"/>
                         <outlet property="endTimeText" destination="5pi-fu-vsx" id="Vg5-Nm-ISZ"/>
                         <outlet property="mapView" destination="Kzi-7x-ptZ" id="GCA-ev-hPm"/>
+                        <outlet property="navBar" destination="d7H-aV-PVb" id="znu-RS-gA0"/>
                         <outlet property="numExplorersText" destination="BAz-DF-HJY" id="vpD-jP-dsV"/>
                         <outlet property="startTimeText" destination="Qao-aj-gTD" id="PXK-yA-maN"/>
                         <outlet property="titleText" destination="xDT-De-mPC" id="hPB-Ki-5iZ"/>
