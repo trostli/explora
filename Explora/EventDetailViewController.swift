@@ -56,7 +56,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
 
     @IBAction func onJoinTap(sender: UIButton) {
         if PFUser.currentUser() != nil {
-            
+            joinEvent(PFUser.currentUser()!)
         } else {
             let storyboard = UIStoryboard(name: "LoginFlow", bundle: nil)
             if let loginNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
@@ -72,6 +72,35 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
     
     func handleLoginSuccess(user: PFUser) {
         print(user)
+        joinEvent(user)
+    }
+    
+    func joinEvent(user: PFUser) {
+        let attendeesRelation = self.event.attendees
+        attendeesRelation?.addObject(user)
+        self.event.saveInBackgroundWithBlock { (success: Bool, error:NSError?) -> Void in
+            if success {
+                self.handleSuccessfulJoin()
+            } else {
+                self.handleErrorJoin()
+            }
+        }
+    }
+    
+    func handleSuccessfulJoin() {
+        let alertController = UIAlertController(title: "Success", message: "Thanks for joining the event! Have fun!", preferredStyle: UIAlertControllerStyle.Alert)
+        let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alertController.addAction(button)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func handleErrorJoin() {
+        let alertController = UIAlertController(title: "Error", message: "Sorry, there was an error in joining the event, please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+        let button = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(button)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Mapbox delegate
