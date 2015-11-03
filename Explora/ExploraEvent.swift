@@ -42,22 +42,17 @@ struct ExploraEventCategories {
 
 class ExploraEvent: PFObject, PFSubclassing {
     
-    var creatorID: String? {
+    var createdBy: PFUser? {
         get {
-            return self["creator_id"] as? String
+            return self["created_by"] as? PFUser
         }
         set {
-            self["creator_id"] = newValue
+            self["created_by"] = newValue
         }
     }
     
-    var attendees: [String]? {
-        get {
-            return self["attendees"] as? [String]
-        }
-        set {
-            self["attendees"] = newValue
-        }
+    var attendees: PFRelation? {
+        return self.relationForKey("attendees")
     }
     
     var attendeesLimit: Int? {
@@ -128,6 +123,15 @@ class ExploraEvent: PFObject, PFSubclassing {
         }
         set {
             self["meeting_location_lng"] = newValue
+        }
+    }
+    
+    var meetingAddress: String? {
+        get {
+            return self["meeting_address"] as? String
+        }
+        set {
+            self["meeting_address"] = newValue
         }
     }
     
