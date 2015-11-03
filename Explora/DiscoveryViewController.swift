@@ -264,7 +264,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
             }
 
             // TODO: Needs to be updated so that event takes an actual user object
-            newEvent.creatorID = PFUser.currentUser()?.objectId
+            newEvent.createdBy = PFUser.currentUser()
             newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
             
             let vc = segue.destinationViewController as! AddEventDetailsViewController
