@@ -34,6 +34,7 @@
 		8466D40E1BE1C93D006FDCEB /* ProfileTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466D40D1BE1C93D006FDCEB /* ProfileTableHeaderView.xib */; };
 		847203611BDF08F5004ECE70 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847203601BDF08F5004ECE70 /* ProfileViewController.swift */; };
 		84CC38411BDF287200540453 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CC38401BDF287200540453 /* Profile.storyboard */; };
+		84EBE3301BE6F3FD004FF97B /* ExploraParseSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE32F1BE6F3FD004FF97B /* ExploraParseSeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		8466D40D1BE1C93D006FDCEB /* ProfileTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableHeaderView.xib; sourceTree = "<group>"; };
 		847203601BDF08F5004ECE70 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84CC38401BDF287200540453 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		84EBE32F1BE6F3FD004FF97B /* ExploraParseSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraParseSeed.swift; sourceTree = "<group>"; };
 		A72B4C40C9A988AC31761544 /* Pods_Explora.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Explora.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 				840481491BD3A1BB007A693E /* ExploraUser.swift */,
 				65A854221BD8B873003090FD /* ExploraPointAnnotation.swift */,
 				8404814B1BD3A327007A693E /* ExploraEvent.swift */,
+				84EBE32F1BE6F3FD004FF97B /* ExploraParseSeed.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				840481551BD844A3007A693E /* LoginViewController.swift in Sources */,
 				847203611BDF08F5004ECE70 /* ProfileViewController.swift in Sources */,
 				658218951BE1CBE400C0FB21 /* ExploraMapView.swift in Sources */,
+				84EBE3301BE6F3FD004FF97B /* ExploraParseSeed.swift in Sources */,
 				23F2EEBA1BE6C83200791ED3 /* AddEventDetailsViewController.swift in Sources */,
 				65A854231BD8B873003090FD /* ExploraPointAnnotation.swift in Sources */,
 				8404814A1BD3A1BB007A693E /* ExploraUser.swift in Sources */,
