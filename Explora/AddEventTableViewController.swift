@@ -23,30 +23,16 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
 
     @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var titleText: UITextField!
-    
     @IBOutlet weak var addressLabel: UILabel!
-    
     @IBOutlet weak var startTimeText: UITextField!
     @IBOutlet weak var endTimeText: UITextField!
-    
     @IBOutlet weak var categoryText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
-    
     @IBOutlet weak var numExplorersText: UITextField!
     private var coords : CLLocationCoordinate2D!
     //Move this to ExploraEvent model
     private var explorers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     var event = ExploraEvent()
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        //UIGraphicsBeginImageContextWithOptions(self.mapView.bounds.size, false, CGFloat(0.0))
-        //self.mapView.drawViewHierarchyInRect(self.mapView.frame, afterScreenUpdates: true)
-       // let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-       // UIGraphicsEndImageContext()
-       // mapImage.image = snapshotImage
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +60,11 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         self.numExplorersText.tag = kTextThree
         self.categoryText.tag = kTextFour
         
+        if let font = UIFont(name: "Arial", size: 16) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+        }
+        
+        
         titleText.becomeFirstResponder()
                 
     }
@@ -95,7 +86,16 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         let camera = MGLMapCamera(lookingAtCenterCoordinate: coords, fromDistance: 9000, pitch: 45, heading: 0)
         mapView.setCamera(camera, withDuration: 3, animationTimingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
         
-
+        // Declare the marker `hello`
+        let hello = MGLPointAnnotation()
+        hello.coordinate = coords
+        
+        // Add marker `hello` to the map
+        mapView.addAnnotation(hello)
+        self.mapView.zoomEnabled = false
+        self.mapView.scrollEnabled = false
+        self.mapView.userInteractionEnabled = false
+        
     }
 
     @IBAction func startTimeEdit(sender: UITextField) {
@@ -128,7 +128,7 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("donePressed:"))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed"))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed:"))
         if let font = UIFont(name: "Arial", size: 15) {
             doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
             cancelButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
@@ -144,10 +144,12 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         if sender.tag == kDateTextOne {
             doneButton.tag = kPickerOne
             datePickerView.tag = kPickerOne
+            cancelButton.tag = kPickerOne
         } else {
             if sender.tag == kDateTextTwo {
                 doneButton.tag = kPickerTwo
                 datePickerView.tag = kPickerTwo
+                cancelButton.tag = kPickerTwo
             }
         }
         
@@ -156,8 +158,8 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
     func handleDatePicker(sender: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .LongStyle
-        dateFormatter.timeStyle = .MediumStyle
-        //dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        dateFormatter.timeStyle = .ShortStyle
+
         let strDate = dateFormatter.stringFromDate(sender.date)
         if sender.tag == kPickerOne {
             self.startTimeText.text = strDate
@@ -195,7 +197,7 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("pickerDonePressed:"))
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed"))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPressed:"))
         if let font = UIFont(name: "Arial", size: 15) {
             doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
             cancelButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font], forState: UIControlState.Normal)
@@ -207,9 +209,11 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         if (sender.tag == kTextThree) {
             pickerView.tag = kTextThree
             doneButton.tag = kTextThree
+            cancelButton.tag = kTextThree
         } else if (sender.tag == kTextFour) {
             pickerView.tag = kTextFour
             doneButton.tag = kTextFour
+            cancelButton.tag = kTextFour
         }
         
         sender.inputAccessoryView = toolBar
@@ -225,7 +229,20 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
         }
     }
     
+    func cancelPressed (sender: UIBarButtonItem) {
+        if sender.tag == kPickerOne {
+            self.startTimeText.resignFirstResponder()
+        } else if sender.tag == kPickerTwo {
+            self.endTimeText.resignFirstResponder()
+        } else if sender.tag == kTextThree {
+            self.numExplorersText.resignFirstResponder()
+        } else if sender.tag == kTextFour {
+            self.categoryText.resignFirstResponder()
+        }
+    }
+    
     @IBAction func cancelAddEvent(sender: UIBarButtonItem) {
+        self.view.endEditing(true)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -298,7 +315,6 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
                 event.category = row
             }
         }
-        
     }
 
 
