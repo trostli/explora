@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -101,11 +101,11 @@
                             <mask key="constraints">
                                 <exclude reference="7m9-fv-clQ"/>
                                 <exclude reference="Fml-5C-6eS"/>
+                                <exclude reference="9P4-ar-iPs"/>
                                 <exclude reference="YI0-WS-6ZJ"/>
                                 <exclude reference="mos-8k-h0R"/>
-                                <exclude reference="9P4-ar-iPs"/>
-                                <exclude reference="bQV-aD-XQ3"/>
                                 <exclude reference="il0-QS-2J5"/>
+                                <exclude reference="bQV-aD-XQ3"/>
                             </mask>
                         </variation>
                     </view>
@@ -124,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="445" y="253"/>
         </scene>
-        <!--AddEventDetails-->
+        <!--AddEventDet-->
         <scene sceneID="E4v-J8-KmB">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddEventDetails" id="RTn-Nc-XnD" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AddEventDet" id="RTn-Nc-XnD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzS-gy-6Ey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1009.5" y="359"/>
