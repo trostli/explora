@@ -8,6 +8,7 @@
 
 import UIKit
 import Mapbox
+import MapKit
 import Parse
 
 class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -36,6 +37,9 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         eventTitleLabel.text = event.eventTitle
         eventDescriptionLabel.text = event.eventDescription
         eventAddressLabel.text = event.eventAddress
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "openDirections")
+        eventAddressLabel.addGestureRecognizer(gestureRecognizer)
 
         let formatter = NSDateFormatter() //Should be cached somewhere since this is expensive
         formatter.dateStyle = NSDateFormatterStyle.LongStyle
@@ -259,6 +263,15 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func openDirections() {
+        let coordinate = CLLocationCoordinate2DMake(self.event.eventLocation!.latitude, self.event.eventLocation!.longitude)
+        //create MKMapItem out of coordinates
+        let placeMark = MKPlacemark(coordinate: coordinate, addressDictionary:nil)
+        let destination =  MKMapItem(placemark: placeMark)
+        
+        let mapOptions = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+        destination.openInMapsWithLaunchOptions(mapOptions as? [String : AnyObject])
+    }
 
     // MARK: - Navigation
 
