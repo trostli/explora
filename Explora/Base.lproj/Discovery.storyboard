@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -126,7 +126,7 @@
                         <outlet property="listEventsButton" destination="s2Y-Sb-pkf" id="ViR-d1-IyA"/>
                         <outlet property="setLocationStackView" destination="Yzl-gz-M2X" id="x5y-xl-jsy"/>
                         <segue destination="RTn-Nc-XnD" kind="show" identifier="addEventDetailsSegue" id="nuF-BU-XeK"/>
-                        <segue destination="EpO-Eo-QOq" kind="presentation" identifier="detailSegue" modalTransitionStyle="partialCurl" id="4up-eP-tl9"/>
+                        <segue destination="EpO-Eo-QOq" kind="showDetail" identifier="detailSegue" id="4up-eP-tl9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
