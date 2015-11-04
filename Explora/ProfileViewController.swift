@@ -33,18 +33,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if user == nil {
             self.user = PFUser.currentUser()
-            
-            PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
-                if (error == nil) {
-                    if let updatedUser = object as? PFUser {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.user = updatedUser
-                        })
-                    }
-                }
-            })
         }
 
+        user!.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+            if (error == nil) {
+                if let updatedUser = object as? PFUser {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.user = updatedUser
+                    })
+                }
+            }
+        })
+        
         setUpProfileHeaderView()
         fetchExploraEvents()
     }
