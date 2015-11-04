@@ -134,7 +134,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let vc = profileStoryboard.instantiateInitialViewController() as! EventDetailViewController
         vc.event = userEvents![indexPath.row]
         self.presentViewController(vc, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func closeButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*

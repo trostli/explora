@@ -206,6 +206,12 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         return annotationImage
     }
 
+    // MARK: - IBActions
+    
+    @IBAction func closeButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
