@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		062A3D55F87FA6F4CB6C5F08 /* Pods_Explora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72B4C40C9A988AC31761544 /* Pods_Explora.framework */; };
-		23F2EEB81BE6C82100791ED3 /* AddEventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F2EEB71BE6C82100791ED3 /* AddEventDetails.storyboard */; };
-		23F2EEBA1BE6C83200791ED3 /* AddEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2EEB91BE6C83200791ED3 /* AddEventDetailsViewController.swift */; };
+		23DD5EE51BEA722000600CED /* AddEventDet.Storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DD5EE41BEA722000600CED /* AddEventDet.Storyboard */; settings = {ASSET_TAGS = (); }; };
+		23DD5EE71BEA722F00600CED /* AddEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DD5EE61BEA722F00600CED /* AddEventTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		651891C11BE9EF7A000FBE2E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651891C01BE9EF7A000FBE2E /* PhotoCell.swift */; };
 		658218951BE1CBE400C0FB21 /* ExploraMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658218941BE1CBE400C0FB21 /* ExploraMapView.swift */; };
 		6582189F1BE3409300C0FB21 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6582189E1BE3409300C0FB21 /* Credentials.plist */; };
@@ -41,8 +41,8 @@
 
 /* Begin PBXFileReference section */
 		02EDA61D1230A10DA55F5559 /* Pods-Explora.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explora.release.xcconfig"; path = "Pods/Target Support Files/Pods-Explora/Pods-Explora.release.xcconfig"; sourceTree = "<group>"; };
-		23F2EEB71BE6C82100791ED3 /* AddEventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEventDetails.storyboard; sourceTree = "<group>"; };
-		23F2EEB91BE6C83200791ED3 /* AddEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDetailsViewController.swift; sourceTree = "<group>"; };
+		23DD5EE41BEA722000600CED /* AddEventDet.Storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEventDet.Storyboard; sourceTree = "<group>"; };
+		23DD5EE61BEA722F00600CED /* AddEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTableViewController.swift; sourceTree = "<group>"; };
 		55B517AB83F9FF3B15E38BB2 /* Pods-Explora.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explora.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explora/Pods-Explora.debug.xcconfig"; sourceTree = "<group>"; };
 		651891C01BE9EF7A000FBE2E /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		658218941BE1CBE400C0FB21 /* ExploraMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraMapView.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		656228AB1BDC41F4000F1315 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				23F2EEB71BE6C82100791ED3 /* AddEventDetails.storyboard */,
+				23DD5EE41BEA722000600CED /* AddEventDet.Storyboard */,
 				840481511BD3B3EB007A693E /* LoginFlow.storyboard */,
 				840481301BCF55A8007A693E /* Discovery.storyboard */,
 				65A1F12C1BE8559C006AD607 /* EventDetail.storyboard */,
@@ -124,8 +124,8 @@
 				8404814F1BD3B38E007A693E /* SignUpViewController.swift */,
 				840481541BD844A3007A693E /* LoginViewController.swift */,
 				65A8541C1BD85713003090FD /* EventDetailViewController.swift */,
+				23DD5EE61BEA722F00600CED /* AddEventTableViewController.swift */,
 				65A854161BD74B54003090FD /* DiscoveryViewController.swift */,
-				23F2EEB91BE6C83200791ED3 /* AddEventDetailsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -286,7 +286,7 @@
 				65A1F12E1BE8559C006AD607 /* EventDetail.storyboard in Resources */,
 				65A8541B1BD74ED1003090FD /* Settings.bundle in Resources */,
 				84CC38411BDF287200540453 /* Profile.storyboard in Resources */,
-				23F2EEB81BE6C82100791ED3 /* AddEventDetails.storyboard in Resources */,
+				23DD5EE51BEA722000600CED /* AddEventDet.Storyboard in Resources */,
 				840481521BD3B3EB007A693E /* LoginFlow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,8 +356,8 @@
 				847203611BDF08F5004ECE70 /* ProfileViewController.swift in Sources */,
 				658218951BE1CBE400C0FB21 /* ExploraMapView.swift in Sources */,
 				84EBE3301BE6F3FD004FF97B /* ExploraParseSeed.swift in Sources */,
-				23F2EEBA1BE6C83200791ED3 /* AddEventDetailsViewController.swift in Sources */,
 				65A854231BD8B873003090FD /* ExploraPointAnnotation.swift in Sources */,
+				23DD5EE71BEA722F00600CED /* AddEventTableViewController.swift in Sources */,
 				8404814A1BD3A1BB007A693E /* ExploraUser.swift in Sources */,
 				8404814E1BD3B22D007A693E /* ExploraClient.swift in Sources */,
 				8466D4051BE1C7D9006FDCEB /* EventBriefTableViewCell.swift in Sources */,
