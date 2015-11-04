@@ -74,18 +74,27 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         attendeesQuery?.findObjectsInBackgroundWithBlock({ (attendees: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 self.attendeesArray = attendees as? [PFUser]
-                self.collectionView.reloadData()
-                
-                if self.attendeesArray?.count > 0 {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.collectionView.reloadData()
+                })
+                if attendees?.count > 0 {
+                    var userIsAttendee = false;
                     for attendee in attendees! {
                         let exploraAttendee = attendee as! PFUser
                         print("attendee: \(exploraAttendee.email)")
                         if exploraAttendee.objectId == PFUser.currentUser()?.objectId {
-                            self.setCurrentUserIsAttendeeState()
+                            userIsAttendee = true;
                             print("is attendee!")
-                        } else {
-                            self.setCurrentUserIsNotAttendeeState()
                         }
+                    }
+                    if (userIsAttendee) {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.setCurrentUserIsAttendeeState()
+                        })
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.setCurrentUserIsNotAttendeeState()
+                        })
                     }
                 } else {
                     self.setCurrentUserIsNotAttendeeState()
