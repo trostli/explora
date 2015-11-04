@@ -247,6 +247,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
         }
     }
 
+    @IBAction func listEventsButtonPressed(sender: AnyObject) {
+        if PFUser.currentUser() == nil {
+            performSegueWithIdentifier("openLoginSegue", sender: sender)
+        } else {
+            performSegueWithIdentifier("openProfileSegue", sender: sender)
+        }
+    }
+    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
