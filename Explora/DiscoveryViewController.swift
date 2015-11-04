@@ -212,51 +212,8 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
     // Use the default marker; see our custom marker example for more information
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
         var annotationImage : MGLAnnotationImage?
-        annotationImage = handleReusableAnnotationImage("other")
         if let exploraAnnotation = annotation as? ExploraPointAnnotation {
-            if let category = exploraAnnotation.event?.category {
-                switch category {
-                case ExploraEventCategory.CommunityCulture.rawValue:
-                    annotationImage = handleReusableAnnotationImage("people")
-                    break
-                case ExploraEventCategory.FamilyEducation.rawValue:
-                    annotationImage = handleReusableAnnotationImage("education")
-                    break
-                case ExploraEventCategory.FoodDrink.rawValue:
-                    annotationImage = handleReusableAnnotationImage("food_drink")
-                    break
-                case ExploraEventCategory.FilmEntertainment.rawValue:
-                    annotationImage = handleReusableAnnotationImage("film")
-                    break
-                case ExploraEventCategory.HealthWellness.rawValue:
-                    annotationImage = handleReusableAnnotationImage("health")
-                    break
-                case ExploraEventCategory.Music.rawValue:
-                    annotationImage = handleReusableAnnotationImage("music")
-                    break
-                case ExploraEventCategory.PerformingVisualArts.rawValue:
-                    annotationImage = handleReusableAnnotationImage("performing_arts")
-                    break
-                case ExploraEventCategory.Sports.rawValue:
-                    annotationImage = handleReusableAnnotationImage("sports")
-                    break
-                case ExploraEventCategory.Travel.rawValue:
-                    annotationImage = handleReusableAnnotationImage("outdoor")
-                    break
-                default:
-                    break
-                }
-            }
-        }
-        return annotationImage
-    }
-
-    // helper
-    func handleReusableAnnotationImage(identifier: String) -> MGLAnnotationImage? {
-        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(identifier)
-        if annotationImage == nil {
-            let image = UIImage(named: identifier)
-            annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: identifier)
+            annotationImage = exploraAnnotation.exploraPointAnnotation(imageForEventCategory: mapView)
         }
         return annotationImage
     }

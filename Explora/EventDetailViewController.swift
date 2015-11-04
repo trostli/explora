@@ -106,13 +106,10 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
     // MARK: - Mapbox delegate
 
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
-        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("people")
-        
-        if annotationImage == nil {
-            let image = UIImage(named: "people")
-            annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: "people")
+        var annotationImage : MGLAnnotationImage?
+        if let exploraAnnotation = annotation as? ExploraPointAnnotation {
+            annotationImage = exploraAnnotation.exploraPointAnnotation(imageForEventCategory: mapView)
         }
-        
         return annotationImage
     }
     
