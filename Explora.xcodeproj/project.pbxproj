@@ -10,6 +10,7 @@
 		062A3D55F87FA6F4CB6C5F08 /* Pods_Explora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72B4C40C9A988AC31761544 /* Pods_Explora.framework */; };
 		23F2EEB81BE6C82100791ED3 /* AddEventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F2EEB71BE6C82100791ED3 /* AddEventDetails.storyboard */; };
 		23F2EEBA1BE6C83200791ED3 /* AddEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2EEB91BE6C83200791ED3 /* AddEventDetailsViewController.swift */; };
+		651891C11BE9EF7A000FBE2E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651891C01BE9EF7A000FBE2E /* PhotoCell.swift */; };
 		658218951BE1CBE400C0FB21 /* ExploraMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658218941BE1CBE400C0FB21 /* ExploraMapView.swift */; };
 		6582189F1BE3409300C0FB21 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6582189E1BE3409300C0FB21 /* Credentials.plist */; };
 		65A1F12E1BE8559C006AD607 /* EventDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A1F12C1BE8559C006AD607 /* EventDetail.storyboard */; };
@@ -43,6 +44,7 @@
 		23F2EEB71BE6C82100791ED3 /* AddEventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEventDetails.storyboard; sourceTree = "<group>"; };
 		23F2EEB91BE6C83200791ED3 /* AddEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDetailsViewController.swift; sourceTree = "<group>"; };
 		55B517AB83F9FF3B15E38BB2 /* Pods-Explora.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explora.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explora/Pods-Explora.debug.xcconfig"; sourceTree = "<group>"; };
+		651891C01BE9EF7A000FBE2E /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		658218941BE1CBE400C0FB21 /* ExploraMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploraMapView.swift; sourceTree = "<group>"; };
 		6582189E1BE3409300C0FB21 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		65A1F12D1BE8559C006AD607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EventDetail.storyboard; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				65A854221BD8B873003090FD /* ExploraPointAnnotation.swift */,
 				8404814B1BD3A327007A693E /* ExploraEvent.swift */,
 				84EBE32F1BE6F3FD004FF97B /* ExploraParseSeed.swift */,
+				651891C01BE9EF7A000FBE2E /* PhotoCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				840481501BD3B38E007A693E /* SignUpViewController.swift in Sources */,
 				65A8541D1BD85713003090FD /* EventDetailViewController.swift in Sources */,
 				8404812D1BCF55A8007A693E /* AppDelegate.swift in Sources */,
+				651891C11BE9EF7A000FBE2E /* PhotoCell.swift in Sources */,
 				840481551BD844A3007A693E /* LoginViewController.swift in Sources */,
 				847203611BDF08F5004ECE70 /* ProfileViewController.swift in Sources */,
 				658218951BE1CBE400C0FB21 /* ExploraMapView.swift in Sources */,
