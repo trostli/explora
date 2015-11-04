@@ -50,7 +50,7 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNo-XV-oyn">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNo-XV-oyn">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,7 +87,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-UZ-zeF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-UZ-zeF">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                             </subviews>
@@ -127,6 +127,7 @@
                             <constraint firstItem="IDT-fP-8Tj" firstAttribute="leading" secondItem="wEV-3d-cxH" secondAttribute="leading" id="BSx-54-LPd"/>
                             <constraint firstItem="4dz-tm-JZh" firstAttribute="top" secondItem="ahY-8G-a3l" secondAttribute="bottom" constant="25" id="Bwf-U0-MUi"/>
                             <constraint firstItem="ahY-8G-a3l" firstAttribute="top" secondItem="4Em-6h-RI2" secondAttribute="bottom" constant="8" id="J0l-a6-6rI"/>
+                            <constraint firstItem="ahY-8G-a3l" firstAttribute="leading" secondItem="o0B-Mn-FSV" secondAttribute="leading" id="KiQ-qQ-qdP"/>
                             <constraint firstItem="IHo-pz-DPc" firstAttribute="trailing" secondItem="wEV-3d-cxH" secondAttribute="trailingMargin" id="MXb-TY-ece"/>
                             <constraint firstItem="4dz-tm-JZh" firstAttribute="leading" secondItem="ahY-8G-a3l" secondAttribute="leading" id="Ms5-Zf-FMW"/>
                             <constraint firstItem="ahY-8G-a3l" firstAttribute="leading" secondItem="4Em-6h-RI2" secondAttribute="leading" id="Y4E-fA-0uw"/>
@@ -141,6 +142,12 @@
                             <constraint firstItem="o0B-Mn-FSV" firstAttribute="top" secondItem="NNo-XV-oyn" secondAttribute="bottom" constant="8" id="xui-ln-K6l"/>
                             <constraint firstItem="IHo-pz-DPc" firstAttribute="top" secondItem="o0B-Mn-FSV" secondAttribute="bottom" constant="8" id="ySQ-1H-VGh"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4Ns-PS-YoE"/>
+                                <exclude reference="Y4E-fA-0uw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="IHo-pz-DPc" id="szi-DR-MNq"/>
@@ -151,14 +158,24 @@
                         <outlet property="joinEventButton" destination="IDT-fP-8Tj" id="DbK-Cw-zuY"/>
                         <outlet property="joinEventButtonHeight" destination="XOq-dJ-xxB" id="lUg-sm-keZ"/>
                         <outlet property="mapViewContainerView" destination="NNo-XV-oyn" id="64j-MT-BfL"/>
+                        <segue destination="d0Y-cE-Qa7" kind="show" identifier="showProfile" id="Go0-Qe-4FJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yPR-Sa-o7d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1184" y="253"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="kcT-JA-BPl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="d0Y-cE-Qa7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RrP-D1-jUI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1760" y="253"/>
+        </scene>
     </scenes>
     <resources>
         <image name="close_orange" width="29" height="29"/>
+        <image name="profile" width="215" height="217"/>
     </resources>
 </document>

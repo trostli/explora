@@ -143,10 +143,10 @@
             </objects>
             <point key="canvasLocation" x="444.5" y="252.5"/>
         </scene>
-        <!--AddEventDetails-->
+        <!--AddEventDet-->
         <scene sceneID="E4v-J8-KmB">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddEventDetails" id="RTn-Nc-XnD" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AddEventDet" id="RTn-Nc-XnD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzS-gy-6Ey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1009.5" y="359"/>

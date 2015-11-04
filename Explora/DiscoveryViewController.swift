@@ -72,7 +72,23 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
     
     @IBAction func onSetLocationTap(sender: UIButton) {
         if PFUser.currentUser() != nil {
-            self.performSegueWithIdentifier("addEventDetailsSegue", sender: self)
+            let newEvent = ExploraEvent()
+            if _newEventAddressString != nil {
+                newEvent.eventAddress = _newEventAddressString!
+            }
+            newEvent.createdBy = PFUser.currentUser()
+            newEvent.attendees?.addObject(PFUser.currentUser()!)
+            newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+            
+            let storyboard = UIStoryboard(name: "AddEventDet", bundle: nil)
+            if let addNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
+                if let addVc = addNavVC.topViewController as? AddEventTableViewController {
+                    addVc.event = newEvent
+                }
+                self.presentViewController(addNavVC, animated: true, completion: nil)
+            }
+
+            
         } else {
             let storyboard = UIStoryboard(name: "LoginFlow", bundle: nil)
             if let loginNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
@@ -262,19 +278,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
             let annotation = sender as! ExploraPointAnnotation
             let vc = segue.destinationViewController as! EventDetailViewController
             vc.event = annotation.event
-        } else if segue.identifier == "addEventDetailsSegue" {
-            let newEvent = ExploraEvent()
-            if _newEventAddressString != nil {
-                newEvent.eventAddress = _newEventAddressString!
-            }
-
-            newEvent.createdBy = PFUser.currentUser()
-            newEvent.attendees?.addObject(PFUser.currentUser()!)
-            newEvent.eventLocation = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-            
-            let vc = segue.destinationViewController as! AddEventDetailsViewController
-            vc.event = newEvent
-        }
+        } 
     }
 
 
