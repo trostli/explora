@@ -24,8 +24,8 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnP-Dn-M7J">
                                                     <rect key="frame" x="8" y="11" width="576" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="0.64177529970000002" blue="0.32494599419999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -70,7 +70,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F2W-wA-vfh">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F2W-wA-vfh">
                                                     <rect key="frame" x="16" y="4" width="568" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -98,7 +98,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-m2-foN">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-m2-foN">
                                                     <rect key="frame" x="16" y="22" width="568" height="49.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -165,7 +165,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="upY-jo-Clh">
-                                                    <rect key="frame" x="42.5" y="4" width="541.5" height="35.5"/>
+                                                    <rect key="frame" x="44.5" y="4" width="539.5" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -174,7 +174,7 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="upY-jo-Clh" firstAttribute="leading" secondItem="P8l-Gt-ckB" secondAttribute="trailing" constant="2" id="2bs-vn-0zn"/>
+                                                <constraint firstItem="upY-jo-Clh" firstAttribute="leading" secondItem="P8l-Gt-ckB" secondAttribute="trailing" constant="4" id="2bs-vn-0zn"/>
                                                 <constraint firstItem="P8l-Gt-ckB" firstAttribute="leading" secondItem="cbx-xT-rez" secondAttribute="leading" constant="16" id="ENt-LX-8j5"/>
                                                 <constraint firstItem="P8l-Gt-ckB" firstAttribute="top" secondItem="cbx-xT-rez" secondAttribute="top" constant="13" id="KSO-bL-h7y"/>
                                                 <constraint firstItem="upY-jo-Clh" firstAttribute="top" secondItem="cbx-xT-rez" secondAttribute="top" constant="4" id="NvT-Il-2pg"/>
@@ -310,5 +310,5 @@
             <point key="canvasLocation" x="1277" y="252"/>
         </scene>
     </scenes>
-    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+    <color key="tintColor" red="1" green="0.64188989699999999" blue="0.35228745769999997" alpha="1" colorSpace="calibratedRGB"/>
 </document>
