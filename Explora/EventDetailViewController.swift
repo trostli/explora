@@ -10,7 +10,7 @@ import UIKit
 import Mapbox
 import Parse
 
-class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDelegate {
+class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var event: ExploraEvent!
     weak var mapView: ExploraMapView!
@@ -19,6 +19,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
     private var currentUserIsAttendee = false
     private var attendeesArray: [PFUser]?
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventMeetingTimeLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
@@ -54,6 +55,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         mapView.addEventToMap(event)
 
         mapViewContainerView.addSubview(mapView)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,6 +73,8 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         attendeesQuery?.findObjectsInBackgroundWithBlock({ (attendees: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 self.attendeesArray = attendees as? [PFUser]
+                self.collectionView.reloadData()
+                
                 if self.attendeesArray?.count > 0 {
                     for attendee in attendees! {
                         let exploraAttendee = attendee as! PFUser
@@ -194,6 +198,28 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         })
         alertController.addAction(button)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - CollectionView delegate
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! PhotoCell
+        let attendee = attendeesArray![indexPath.row] as PFUser
+        cell.photoImageView.setImageWithURL(NSURL(string: attendee.pictureURL!)!)
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.attendeesArray != nil {
+            print("# of attendees: \(self.attendeesArray!.count)")
+            return self.attendeesArray!.count
+        } else {
+            return 0
+        }
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
     }
 
     // MARK: - Mapbox delegate
