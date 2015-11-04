@@ -50,6 +50,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         let styleURL = NSURL(string: "asset://styles/emerald-v8.json")
         mapView = ExploraMapView(frame: mapViewContainerView.bounds, styleURL: styleURL)
         mapView.scrollEnabled = false
+        mapView.userInteractionEnabled = false
         mapView.delegate = self
         mapView.setCenterCoordinate(event.eventCoordinate!, zoomLevel: 14.0, animated: false)
         mapView.addEventToMap(event)
@@ -171,7 +172,7 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
             self.event.saveInBackgroundWithBlock { (success: Bool, error:NSError?) -> Void in
                 if success {
                     self.setCurrentUserIsNotAttendeeState()
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.handleSuccessfulUnjoin()
                 } else {
                     self.showAlert("Error", message: "Sorry, there was an error, please try again.", dismissViewController: false)
                 }
@@ -183,6 +184,10 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
 
     func handleSuccessfulJoin() {
         showAlert("Success", message: "Thanks for joining the event! Have fun!", dismissViewController: true)
+    }
+    
+    func handleSuccessfulUnjoin() {
+        showAlert("Unjoined", message: "Sorry to see you go!", dismissViewController: true)
     }
 
     func handleError() {
@@ -205,7 +210,9 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! PhotoCell
         let attendee = attendeesArray![indexPath.row] as PFUser
-        cell.photoImageView.setImageWithURL(NSURL(string: attendee.pictureURL!)!)
+        if attendee.pictureURL != nil {
+            cell.photoImageView.setImageWithURL(NSURL(string: attendee.pictureURL!)!)
+        }
         return cell
     }
     
@@ -216,6 +223,11 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         } else {
             return 0
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let attendee = attendeesArray![indexPath.row] as PFUser
+        self.performSegueWithIdentifier("showProfile", sender: attendee)
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -238,14 +250,17 @@ class EventDetailViewController: UIViewController, MGLMapViewDelegate, LoginDele
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showProfile" {
+            let exploraUser = sender as! PFUser
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.user = exploraUser
+        }
     }
-    */
+
 
 }
