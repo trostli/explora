@@ -68,7 +68,7 @@ extension PFUser : ExploraUser {
     }
 
     func getUserInfo() {
-        if((FBSDKAccessToken.currentAccessToken()) != nil){
+        if(FBSDKAccessToken.currentAccessToken() != nil){
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
                 if (error == nil) {
                     let dict = result as! NSDictionary
