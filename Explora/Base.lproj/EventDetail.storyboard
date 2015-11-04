@@ -68,8 +68,8 @@
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8F-9K-BgV" userLabel="Close Button">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <animations/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="close_white"/>
+                                <color key="tintColor" red="0.95294117647058818" green="0.59215686274509804" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="close_orange"/>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="iAC-yU-Nkj" eventType="touchUpInside" id="dkC-He-HVe"/>
                                 </connections>
@@ -112,6 +112,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close_white" width="29" height="29"/>
+        <image name="close_orange" width="29" height="29"/>
     </resources>
 </document>
