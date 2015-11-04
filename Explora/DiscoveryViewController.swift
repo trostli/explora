@@ -41,9 +41,6 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
         mapView.showsUserLocation = true
         mapView.delegate = self
         
-        // intialize text view
-        eventLocationTextView.hidden = true
-        
         view.addSubview(mapView)
         view.sendSubviewToBack(mapView)
 
@@ -101,23 +98,23 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
         UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.7, options: .CurveEaseIn, animations: { () -> Void in
             self.createEventButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI)/4.0 * 3.0)
             self.listEventsButton.transform = CGAffineTransformMakeTranslation(75.0, -75.0)
+            self.eventLocationTextView.transform = CGAffineTransformMakeTranslation(0.0, 85.0)
             }, completion: nil)
         
         setLocationStackView.hidden = false
-        eventLocationTextView.hidden = false
         events = nil
     }
     
     func transitionOutOfCreateEventMode() {
         inSetLocationMode = false
         
-        UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.7, options: .CurveEaseIn, animations: { () -> Void in
             self.createEventButton.transform = CGAffineTransformMakeRotation(0.0)
             self.listEventsButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+            self.eventLocationTextView.transform = CGAffineTransformMakeTranslation(0.0, -85.0)
             }, completion: nil)
         
         setLocationStackView.hidden = true
-        eventLocationTextView.hidden = true
         showCurrentLocationAndEvents()
     }
     
@@ -149,8 +146,8 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
         let textString = "\(titleString)\n\(locationString)"
         let attrText = NSMutableAttributedString(string: textString)
         
-        let largeFont = UIFont(name: "Arial", size: 14.0)!
-        let smallFont = UIFont(name: "Arial", size: 11.0)!
+        let largeFont = UIFont(name: "Arial", size: 16.0)!
+        let smallFont = UIFont(name: "Arial", size: 13.0)!
         
         //  Convert textString to NSString because attrText.addAttribute takes an NSRange.
         let titleTextRange = (textString as NSString).rangeOfString(titleString)
@@ -182,6 +179,9 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
     }
 
     func addEventsToMap() {
+        if mapView.annotations != nil {
+            mapView.removeAnnotations(mapView.annotations!)
+        }
         if events != nil {
             for event in events! {
                 mapView.addEventToMap(event)
@@ -219,7 +219,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
     }
     
     func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        if annotation is ExploraPointAnnotation {
+        if annotation is ExploraPointAnnotation && inSetLocationMode == false {
             return true
         } else {
             return false
