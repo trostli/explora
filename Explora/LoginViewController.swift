@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(nil) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
+                user.getUserInfo()
                 let message = "You've successfully logged in!"
                 print(message)
                 let alertController = UIAlertController(title: "Facebook Signin", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -73,21 +74,6 @@ class LoginViewController: UIViewController {
                 // The login failed. Check error to see why.
                 print(error)
             }
-        }
-    }
-    
-    func getUserInfo() {
-        if((FBSDKAccessToken.currentAccessToken()) != nil){
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
-                if (error == nil) {
-                    let dict = result as! NSDictionary
-                    if let user = PFUser.currentUser() {
-                        user.firstName = dict["first_name"] as? String
-                        user.pictureURL = dict.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String
-                        user.saveEventually()
-                    }
-                }
-            })
         }
     }
     

@@ -74,6 +74,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(nil) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
+                user.getUserInfo()
                 let message = "Sign up was successful!"
                 print(message)
                 let alertController = UIAlertController(title: "Facebook Signup", message: message, preferredStyle: UIAlertControllerStyle.Alert)

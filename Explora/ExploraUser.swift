@@ -15,6 +15,7 @@
 */
 
 import Parse
+import FBSDKCoreKit
 
 protocol ExploraUser {
     var createdEvents: [String]? { get }
@@ -66,6 +67,21 @@ extension PFUser : ExploraUser {
         }
     }
 
+    func getUserInfo() {
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil) {
+                    let dict = result as! NSDictionary
+                    if let user = PFUser.currentUser() {
+                        user.firstName = dict["first_name"] as? String
+                        user.pictureURL = dict.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String
+                        user.saveEventually()
+                    }
+                }
+            })
+        }
+    }
+    
     // MARK: - Location
     
     // Synchronize the user's location with Parse
