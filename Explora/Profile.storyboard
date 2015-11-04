@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZR-vk-J4o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BZR-vk-J4o">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
@@ -21,6 +21,15 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.2562442492" green="0.85570474789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aft-pA-KjI">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <animations/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="close_white"/>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="BZR-vk-J4o" eventType="touchUpInside" id="jlv-SO-LrH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.2562442492" green="0.85570474789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,4 +49,7 @@
             <point key="canvasLocation" x="561" y="187"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close_white" width="29" height="29"/>
+    </resources>
 </document>
