@@ -99,7 +99,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func fetchExploraEvents() {
         if user != nil {
             let query = PFQuery(className: ExploraEvent.parseClassName())
-            query.whereKey("creator_id", containsString: user?.objectId!)
+            query.whereKey("attendees", equalTo: user!)
             query.findObjectsInBackgroundWithBlock({ (events: [PFObject]?, error: NSError?) -> Void in
                 print("events: \(events)")
                 self.userEvents = events as? [ExploraEvent]
