@@ -134,7 +134,7 @@
                         <outlet property="listEventsButton" destination="s2Y-Sb-pkf" id="ViR-d1-IyA"/>
                         <outlet property="setLocationStackView" destination="Yzl-gz-M2X" id="x5y-xl-jsy"/>
                         <segue destination="RTn-Nc-XnD" kind="show" identifier="addEventDetailsSegue" id="nuF-BU-XeK"/>
-                        <segue destination="EpO-Eo-QOq" kind="presentation" identifier="detailSegue" modalTransitionStyle="partialCurl" id="4up-eP-tl9"/>
+                        <segue destination="EpO-Eo-QOq" kind="showDetail" identifier="detailSegue" id="4up-eP-tl9"/>
                         <segue destination="npP-n1-fr0" kind="presentation" identifier="openProfileSegue" id="MW0-F3-8ad"/>
                         <segue destination="vwg-9n-TQM" kind="presentation" identifier="openLoginSegue" id="6Rt-oH-3To"/>
                     </connections>
