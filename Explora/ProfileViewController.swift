@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import AFNetworking
+import MBProgressHUD
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ProfileTableHeaderViewDelegate {
 
@@ -102,12 +103,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func fetchExploraEvents() {
         if user != nil {
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             let query = PFQuery(className: ExploraEvent.parseClassName())
             query.whereKey("attendees", equalTo: user!)
             query.findObjectsInBackgroundWithBlock({ (events: [PFObject]?, error: NSError?) -> Void in
                 print("events: \(events)")
                 self.userEvents = events as? [ExploraEvent]
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                     self.tableView.reloadData()
                 })
             })
