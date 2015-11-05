@@ -49,8 +49,9 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3Y-xE-TV2" userLabel="Facebook Signin Button">
-                                <rect key="frame" x="225" y="308" width="150" height="30"/>
+                                <rect key="frame" x="220" y="322" width="160" height="30"/>
                                 <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign in with Facebook">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiZ-97-KZF" userLabel="Signup Button">
-                                <rect key="frame" x="274" y="372" width="52" height="30"/>
+                                <rect key="frame" x="274" y="386" width="52" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
@@ -67,8 +68,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qob-XY-zzs" userLabel="Signin Button">
-                                <rect key="frame" x="277" y="257" width="47" height="30"/>
+                                <rect key="frame" x="275.5" y="277" width="50" height="30"/>
                                 <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -84,8 +86,9 @@
                             <constraint firstItem="a3Y-xE-TV2" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="7jO-ml-Xpd"/>
                             <constraint firstItem="qob-XY-zzs" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="En6-DH-7uH"/>
                             <constraint firstItem="7zc-aH-2GO" firstAttribute="top" secondItem="Gv9-D1-gN9" secondAttribute="bottom" constant="8" id="Grq-8k-P7g"/>
+                            <constraint firstItem="a3Y-xE-TV2" firstAttribute="top" secondItem="qob-XY-zzs" secondAttribute="bottom" constant="15" id="Y2y-ss-ei4"/>
                             <constraint firstItem="RqT-w0-Qwh" firstAttribute="centerX" secondItem="tNt-Vj-3rq" secondAttribute="centerX" id="a1P-x1-gko"/>
-                            <constraint firstItem="qob-XY-zzs" firstAttribute="top" secondItem="7zc-aH-2GO" secondAttribute="bottom" constant="20" id="b6f-4h-pjE"/>
+                            <constraint firstItem="qob-XY-zzs" firstAttribute="top" secondItem="7zc-aH-2GO" secondAttribute="bottom" constant="40" id="b6f-4h-pjE"/>
                             <constraint firstItem="NiZ-97-KZF" firstAttribute="top" secondItem="a3Y-xE-TV2" secondAttribute="bottom" constant="34" id="c9J-dz-9u5"/>
                             <constraint firstItem="7zc-aH-2GO" firstAttribute="centerX" secondItem="Gv9-D1-gN9" secondAttribute="centerX" id="h8v-Z2-n4R"/>
                             <constraint firstItem="RqT-w0-Qwh" firstAttribute="top" secondItem="Nsj-Cy-YRI" secondAttribute="bottom" constant="104" id="jtO-Bo-9SU"/>
@@ -95,6 +98,11 @@
                             <constraint firstItem="Gv9-D1-gN9" firstAttribute="top" secondItem="WWK-AX-81h" secondAttribute="bottom" constant="17" id="sUz-zQ-GlY"/>
                             <constraint firstItem="WWK-AX-81h" firstAttribute="centerX" secondItem="RqT-w0-Qwh" secondAttribute="centerX" id="uUc-5K-Lb6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="nYo-1n-85y"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="99L-iY-sda">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="qN5-E4-EYX">
@@ -132,7 +140,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aqs-5h-yxc" userLabel="Username Field">
-                                <rect key="frame" x="225.5" y="97.5" width="150" height="30"/>
+                                <rect key="frame" x="225" y="97" width="150" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="2t2-hA-yAD"/>
@@ -141,14 +149,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnW-ze-xm5" userLabel="Email Label">
-                                <rect key="frame" x="279" y="152.5" width="41" height="20.5"/>
+                                <rect key="frame" x="279" y="152" width="41" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DtH-gd-xRk">
-                                <rect key="frame" x="225" y="183.5" width="150" height="30"/>
+                                <rect key="frame" x="225" y="183" width="150" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Fi1-Is-bfB"/>
@@ -157,14 +165,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kO-HI-Nce" userLabel="Password Label">
-                                <rect key="frame" x="263" y="238.5" width="74" height="20.5"/>
+                                <rect key="frame" x="263" y="238" width="74" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eRm-FB-osK">
-                                <rect key="frame" x="225" y="266.5" width="150" height="30"/>
+                                <rect key="frame" x="225" y="266" width="150" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Y1m-j1-pcS"/>
@@ -173,9 +181,10 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qx-8V-Vxk">
-                                <rect key="frame" x="277" y="314.5" width="47" height="30"/>
+                                <rect key="frame" x="274" y="336.5" width="53" height="30"/>
                                 <animations/>
-                                <state key="normal" title="submit">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -183,9 +192,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkI-a1-gbB">
-                                <rect key="frame" x="221" y="380.5" width="158" height="30"/>
+                                <rect key="frame" x="216.5" y="381.5" width="167" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Sign Up with Facebook"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Sign Up with Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="signUpWithFacebookButtonPressed:" destination="TnQ-ru-sDe" eventType="touchUpInside" id="7MS-Tx-KBF"/>
                                 </connections>
@@ -195,14 +207,14 @@
                         <color key="backgroundColor" red="0.2562442492" green="0.85570474789999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dtc-up-dhV" firstAttribute="top" secondItem="gkq-A0-Mgm" secondAttribute="bottom" constant="67" id="6Oy-ZN-Snn"/>
-                            <constraint firstItem="5qx-8V-Vxk" firstAttribute="top" secondItem="eRm-FB-osK" secondAttribute="bottom" constant="17.5" id="F1h-O8-Anx"/>
+                            <constraint firstItem="5qx-8V-Vxk" firstAttribute="top" secondItem="eRm-FB-osK" secondAttribute="bottom" constant="40" id="F1h-O8-Anx"/>
                             <constraint firstItem="eRm-FB-osK" firstAttribute="top" secondItem="1kO-HI-Nce" secondAttribute="bottom" constant="8" id="Fja-ra-jh4"/>
                             <constraint firstItem="Aqs-5h-yxc" firstAttribute="centerX" secondItem="dtc-up-dhV" secondAttribute="centerX" id="G3H-SR-2JF"/>
                             <constraint firstItem="1kO-HI-Nce" firstAttribute="top" secondItem="DtH-gd-xRk" secondAttribute="bottom" constant="25" id="HXl-0a-c7y"/>
                             <constraint firstItem="1kO-HI-Nce" firstAttribute="centerX" secondItem="GhI-5N-fja" secondAttribute="centerX" id="KJz-iO-SOh"/>
                             <constraint firstItem="DtH-gd-xRk" firstAttribute="centerX" secondItem="GhI-5N-fja" secondAttribute="centerX" id="OXd-nN-2Me"/>
                             <constraint firstItem="eRm-FB-osK" firstAttribute="centerX" secondItem="1kO-HI-Nce" secondAttribute="centerX" id="S7q-be-YKb"/>
-                            <constraint firstItem="rkI-a1-gbB" firstAttribute="top" secondItem="5qx-8V-Vxk" secondAttribute="bottom" constant="36" id="YnT-UI-DrI"/>
+                            <constraint firstItem="rkI-a1-gbB" firstAttribute="top" secondItem="5qx-8V-Vxk" secondAttribute="bottom" constant="15" id="YnT-UI-DrI"/>
                             <constraint firstItem="5qx-8V-Vxk" firstAttribute="centerX" secondItem="GhI-5N-fja" secondAttribute="centerX" id="YqO-xW-xhV"/>
                             <constraint firstItem="gnW-ze-xm5" firstAttribute="top" secondItem="Aqs-5h-yxc" secondAttribute="bottom" constant="25" id="apd-BT-NKT"/>
                             <constraint firstItem="gnW-ze-xm5" firstAttribute="centerX" secondItem="DtH-gd-xRk" secondAttribute="centerX" id="asX-Cq-yD2"/>
