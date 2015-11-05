@@ -10,7 +10,9 @@ import UIKit
 import Mapbox
 import MapKit
 
-
+protocol AddEventDelegate: class {
+    func handleAddEvent()
+}
 
 
 class AddEventTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -33,6 +35,8 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
     //Move this to ExploraEvent model
     private var explorers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     var event = ExploraEvent()
+    
+    weak var delegate: AddEventDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -259,7 +263,9 @@ class AddEventTableViewController: UITableViewController, UIPickerViewDataSource
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("The object has been saved.")
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    self.delegate?.handleAddEvent()
+                })
                 
             } else {
                 print("Error : \(error!.description)")

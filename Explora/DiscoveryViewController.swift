@@ -10,7 +10,7 @@ import UIKit
 import Mapbox
 import Parse
 
-class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelegate {
+class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelegate, AddEventDelegate {
 
     weak var mapView: ExploraMapView!
 
@@ -58,6 +58,14 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func listEventsButtonPressed(sender: AnyObject) {
+        if PFUser.currentUser() == nil {
+            performSegueWithIdentifier("openLoginSegue", sender: sender)
+        } else {
+            performSegueWithIdentifier("openProfileSegue", sender: sender)
+        }
+    }
+    
     @IBAction func onCreateEventTap(sender: UIButton) {
         if inSetLocationMode == false {
             transitionToCreateEventMode()
@@ -84,6 +92,7 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
             if let addNavVC = storyboard.instantiateInitialViewController() as? UINavigationController {
                 if let addVc = addNavVC.topViewController as? AddEventTableViewController {
                     addVc.event = newEvent
+                    addVc.delegate = self;
                 }
                 self.presentViewController(addNavVC, animated: true, completion: nil)
             }
@@ -262,13 +271,10 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
             getAddressStringFromCoords(mapView.centerCoordinate)
         }
     }
-
-    @IBAction func listEventsButtonPressed(sender: AnyObject) {
-        if PFUser.currentUser() == nil {
-            performSegueWithIdentifier("openLoginSegue", sender: sender)
-        } else {
-            performSegueWithIdentifier("openProfileSegue", sender: sender)
-        }
+    
+    // MARK: - AddEvent Delegate
+    func handleAddEvent() {
+        transitionOutOfCreateEventMode()
     }
     
     // MARK: - Navigation
