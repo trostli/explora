@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol ProfileTableHeaderViewDelegate: class {
+    func handleLogoutButtonPressed()
+}
+
 class ProfileTableHeaderView: UIView {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    
+    weak var delegate: ProfileTableHeaderViewDelegate?
     
     static let nibName = "ProfileTableHeaderView"
     
@@ -47,5 +53,9 @@ class ProfileTableHeaderView: UIView {
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
         print("Making image a circle")
+    }
+    
+    @IBAction func logoutButtonPressed(sender: AnyObject) {
+        self.delegate?.handleLogoutButtonPressed()
     }
 }

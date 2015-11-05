@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import AFNetworking
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ProfileTableHeaderViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var profileHeaderView: ProfileTableHeaderView?
@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func setUpProfileHeaderView() {
         profileHeaderView = ProfileTableHeaderView.loadViewFromNib()
+        profileHeaderView?.delegate = self;
         if let url = user!.pictureURL {
             profileHeaderView!.imageURL = url
         }
@@ -137,6 +138,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let vc = profileStoryboard.instantiateInitialViewController() as! EventDetailViewController
         vc.event = userEvents![indexPath.row]
         self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: - Profile View Delegate
+    func handleLogoutButtonPressed() {
+        dismissViewControllerAnimated(true) { () -> Void in
+            PFUser.logOutInBackground()
+        }
     }
     
     // MARK: - IBActions
