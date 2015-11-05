@@ -190,7 +190,6 @@ class DiscoveryViewController: UIViewController, MGLMapViewDelegate, LoginDelega
     func getEvents(nearGeoPoint: PFGeoPoint) {
         let query = PFQuery(className:ExploraEvent.parseClassName())
         query.whereKey("event_location", nearGeoPoint:nearGeoPoint)
-        query.limit = 10
         query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 self.events = objects as? [ExploraEvent]
