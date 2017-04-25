@@ -19,7 +19,12 @@ Explora is an app that allows you to instantly see what events are going on arou
 ### Features
 
 #### Walkthrough
-<blockquote class="imgur-embed-pub" lang="en" data-id="8yBMf6D"><a href="//imgur.com/8yBMf6D"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<div class="video_container">
+  <video controls="controls">
+    <source src="https://i.imgur.com/8yBMf6D.mp4" type="video/mp4">
+  </video> 
+</div>
 
 #### Required
 
